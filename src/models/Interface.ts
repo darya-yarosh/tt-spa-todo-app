@@ -25,3 +25,8 @@ export const enum PageList {
     projects = "Project List",
     tasks = "Task List"
 }
+
+export const enum FormOperation {
+    create = "Create",
+    edit = "Edit"
+}
