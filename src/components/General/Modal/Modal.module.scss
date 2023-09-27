@@ -8,10 +8,13 @@
   position: absolute;
   inset: 0;
   background: hsla(0, 0%, 27%, 0.75);
-  backdrop-filter: blur(3px);
+  //backdrop-filter: blur(2px);
   animation: fadeIn 850ms cubic-bezier(0.14, 0.78, 0.36, 1);
 }
 
 .content {
-  
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  animation: slideIn 500ms cubic-bezier(0.14, 0.78, 0.36, 1);
 }

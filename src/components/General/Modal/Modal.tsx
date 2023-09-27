@@ -1,18 +1,18 @@
-import { ReactNode } from "react";
-
-import "components/General/Modal/Modal.scss";
+import styles from "components/General/Modal/Modal.module.scss";
 
 interface ModalProps {
-    handleDismiss: boolean | (() => void),
-    children: ReactNode,
+    handleDismiss: ()=>void,
+    children?: React.ReactNode,
 }
 
 export default function Modal({
     handleDismiss,
     children,
 }: ModalProps) {
-    return <div className="wrapper">
-        <div className="backdrop" onClick={() => handleDismiss} />
-        <span className="content">{children}</span>
+    return <div className={styles.wrapper}>
+        <div className={styles.backdrop} onClick={handleDismiss} />
+        <div className={styles.drawer}>
+            <span className={styles.content}>{children}</span>
+        </div>
     </div>
 }
