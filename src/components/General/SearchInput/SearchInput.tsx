@@ -1,6 +1,6 @@
 import searchIcon from "components/General/SearchInput/search.svg";
 
-import "components/General/SearchInput/SearchInput.scss";
+import styles from "components/General/SearchInput/SearchInput.module.scss";
 
 interface SearchInputProps {
     value: string;
@@ -18,7 +18,7 @@ export default function SearchInput({
     }
 
     return (
-        <form className="input-wrapper"
+        <form className={styles.wrapper}
             onSubmit={preventEvent}
         >
             <input
@@ -28,7 +28,7 @@ export default function SearchInput({
                 onChange={(event) => onChange(event.target.value)}
             />
             <img
-                className="search-icon"
+                className={styles.icon}
                 src={searchIcon}
                 alt="Search Icon"
             />
