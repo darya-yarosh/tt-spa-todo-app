@@ -1,0 +1,61 @@
+@import "App.scss";
+
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  /*padding: 24px;*/
+  gap: 8px;
+}
+
+.title {
+  font-family: "PT Sans Caption";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 41px;
+
+  color: $color-first;
+  margin: 0;
+}
+
+.line {
+  display: flex;
+  height: 0px;
+
+  border: 1px solid #000000;
+  margin: 0px 20px;
+  margin: 12px 0px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  // margin: 16px 24px;
+  margin: 16px 0px;
+  // padding: 0px 24px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+
+  .projectGrid {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    column-count: 2;
+    column-rule: dashed;
+
+    .span {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex: 1;
+    }
+  }
+}
