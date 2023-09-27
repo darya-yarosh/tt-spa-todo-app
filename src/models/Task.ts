@@ -8,16 +8,16 @@ export default interface Task {
     dateEnded: Date,
     priority: Priority,
     status: TaskStatus,
-    subtasks: Task[],
+    subtasks: Subtask[],
     attachedFiles: AttachedFile[],
     comments: Comment[],
 }
 
-export type Priority = {
-    low: "low",
-    medium: "medium",
-    high: "high",
-    critical: "critical"
+export enum Priority {
+    low= "low",
+    medium= "medium",
+    high= "high",
+    critical= "critical"
 }
 
 export enum TaskStatus {
@@ -36,4 +36,10 @@ export interface Comment {
     id: string,
     value: string,
     subComments: Comment[],
+}
+
+export interface Subtask {
+    id: string,
+    status: false,
+    value: string,
 }
