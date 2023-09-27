@@ -7,7 +7,7 @@ export default interface Task {
     timeInWork: string,
     dateEnded: Date,
     priority: Priority,
-    status: Status,
+    status: TaskStatus,
     subtasks: Task[],
     attachedFiles: AttachedFile[],
     comments: Comment[],
@@ -20,10 +20,10 @@ export type Priority = {
     critical: "critical"
 }
 
-export type Status = {
-    queue: "Queue",
-    development: "Development",
-    done: "Done",
+export enum TaskStatus {
+    queue = "Queue",
+    development = "Development",
+    done = "Done",
 }
 
 export interface AttachedFile {
