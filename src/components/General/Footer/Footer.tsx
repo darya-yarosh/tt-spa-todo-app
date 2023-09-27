@@ -1,7 +1,9 @@
 import { AppInfo } from "models/Interface";
 
-import "components/General/Footer/Footer.scss";
+import styles from "components/General/Footer/Footer.module.scss";
 
 export default function Footer() {
-    return <footer><p>{AppInfo.author}</p></footer>
+    return <footer className={styles.wrapper}>
+        <p className={styles.author}>{AppInfo.author}</p>
+    </footer>
 }
