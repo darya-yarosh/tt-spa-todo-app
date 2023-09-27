@@ -1,9 +1,9 @@
-import "components/General/ButtonIcon/ButtonIcon.scss";
+import styles from "components/General/ButtonIcon/ButtonIcon.module.scss";
 
 interface ButtonIconProps {
     iconSVG: string;
     caption: string;
-    onClick: () => void
+    onClick: () => void;
 }
 
 export default function ButtonIcon({
@@ -12,9 +12,9 @@ export default function ButtonIcon({
     onClick,
 }: ButtonIconProps) {
     return (
-        <button type="button" onClick={onClick}>
+        <button className={styles.wrapper} type="button" onClick={onClick}>
             <img
-                className="buttonIcon"
+                className={styles.icon}
                 src={iconSVG}
                 alt={caption}
             />
