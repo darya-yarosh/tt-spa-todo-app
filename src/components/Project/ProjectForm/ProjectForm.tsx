@@ -4,10 +4,10 @@ import { BUTTON, FormOperation } from "models/Interface";
 
 import ButtonIcon from "components/General/ButtonIcon/ButtonIcon";
 
-import returnIcon from "images/return.svg";
-import confirmIcon from "images/confirm.svg";
+import returnIcon from "images/buttons/return.svg";
+import confirmIcon from "images/buttons/confirm.svg";
 
-import "components/Project/ProjectForm/ProjectForm.scss"
+import styles from "components/Project/ProjectForm/ProjectForm.module.scss"
 
 interface ProjectFormProps {
     operationTitle: FormOperation
@@ -22,17 +22,42 @@ export default function ProjectForm({
 }: ProjectFormProps) {
     const [projectTitle, setProjectTitle] = useState<string>("");
 
-    return <form>
-        <div>
+    function isCorrectProject() {
+        return projectTitle.length > 0;
+    }
+
+    function handlerSendForm() {
+        if (isCorrectProject()) {
+            sendForm(projectTitle);
+            closeForm();
+        }
+        else {
+            window.alert("Incorrect project name.")
+        }
+    }
+
+    return <form className={styles.wrapper} 
+        onSubmit={(event) => {
+            event.preventDefault();
+            handlerSendForm();
+        }}>
+        <div className={styles.header}>
             <ButtonIcon iconSVG={returnIcon} caption={BUTTON.return} onClick={closeForm} />
-            <p>{operationTitle} project:</p>
+            <p className={styles.title}>{operationTitle} project:</p>
         </div>
-        <div>
-            <label>Title:</label>
-            <input type="text" placeholder="№1 Project name" value={projectTitle} onChange={(event) => setProjectTitle(event.target.value)}>{projectTitle}</input>
+        <span className={styles.line}/>
+        <div className={styles.content}>
+            <span className={styles.span}>
+                <label className={styles.label}>Title:</label>
+                <input className={styles.input_string} type="text"
+                    placeholder="№1 Project name"
+                    value={projectTitle}
+                    onChange={(event) => setProjectTitle(event.target.value)}
+                />
+            </span>
         </div>
-        <div>
-            <ButtonIcon iconSVG={confirmIcon} caption={BUTTON.save} onClick={() => sendForm(projectTitle)} />
+        <div className={styles.navigation}>
+            <ButtonIcon iconSVG={confirmIcon} caption={BUTTON.save} onClick={handlerSendForm} />
         </div>
     </form>
 }
