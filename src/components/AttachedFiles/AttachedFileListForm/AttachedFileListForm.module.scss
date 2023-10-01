@@ -1,0 +1,41 @@
+@import "App";
+
+.wrapper {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .tableWrapper {
+    max-height: 20vh;
+    overflow-y: scroll;
+  }
+
+  table {
+    padding: 2px;
+  }
+
+  th,
+  td {
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 4px;
+    color: $color-first;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid gray;
+  }
+
+  input[type="file"] {
+    color: transparent;
+  }
+}
+
+@media (max-height: 768px) {
+  .wrapper .tableWrapper {
+    max-height: 14vh;
+  }
+}
