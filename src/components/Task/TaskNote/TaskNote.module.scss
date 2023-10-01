@@ -1,0 +1,54 @@
+@import "App";
+
+.wrapper {
+  box-sizing: border-box;
+
+  background: $color-third;
+  border: 2px solid $color-first;
+  box-shadow: 0px 4px 4px $shadow-object;
+  border-radius: 5px;
+  padding: 8px;
+
+  color: $color-first;
+  cursor: move;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  font-weight: 400;
+  font-size: 18px;
+  margin: 0;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.line {
+  display: flex;
+  height: 0px;
+
+  border: 1px solid $color-first;
+  margin: 0px 20px;
+  margin: 12px 0px;
+}
+
+.property {
+  font-weight: 400;
+  font-size: 14px;
+  .label {
+    margin: 0;
+  }
+}
+
+.dateInfo {
+  display: flex;
+  justify-content: space-between;
+}
