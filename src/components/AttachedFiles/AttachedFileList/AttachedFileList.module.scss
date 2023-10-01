@@ -1,0 +1,30 @@
+@import "App";
+
+.wrapper {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    .tableWrapper {
+        height: 100%;
+        max-height: 20vh;
+        overflow-y: scroll;
+        padding: 0px 8px 0px 0px;
+    }
+
+    table {
+        padding: 2px;
+    }
+
+    th, td {
+        word-wrap: break-word;
+        word-break: break-all;
+        padding: 4px;
+        color:$color-first;
+    }
+    
+    table, th,td {
+        border: 1px solid gray;
+    }
+}
