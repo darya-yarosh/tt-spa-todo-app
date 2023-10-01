@@ -1,23 +1,26 @@
+import { AttachedFile } from "models/AttachedFile";
+import { Comment } from "models/Comment";
+
 export default interface Task {
     id: string,
     number: number,
     title: string,
     desc: string,
-    dataCreated: Date,
-    timeInWork: string,
-    dateEnded: Date,
+    dataCreated: string,
+    workingHours: number,
+    dateEnded: string,
     priority: Priority,
     status: TaskStatus,
-    subtasks: Subtask[],
+    subtasks: ToggleTask[],
     attachedFiles: AttachedFile[],
     comments: Comment[],
 }
 
 export enum Priority {
-    low= "low",
-    medium= "medium",
-    high= "high",
-    critical= "critical"
+    low = "low",
+    medium = "medium",
+    high = "high",
+    critical = "critical"
 }
 
 export enum TaskStatus {
@@ -26,20 +29,8 @@ export enum TaskStatus {
     done = "Done",
 }
 
-export interface AttachedFile {
+export interface ToggleTask {
     id: string,
-    name: string,
-    file: File,
-}
-
-export interface Comment {
-    id: string,
-    value: string,
-    subComments: Comment[],
-}
-
-export interface Subtask {
-    id: string,
-    status: false,
+    status: boolean,
     value: string,
 }
