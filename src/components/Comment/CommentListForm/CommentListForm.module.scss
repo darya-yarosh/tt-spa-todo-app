@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  padding: 0px 8px;
+  font-size: 14px;
+  gap: 6px;
+
+  .commentsWrapper {
+    height: 100%;
+    max-height: 15vh;
+    overflow-y: scroll;
+    padding: 0px 12px 0px 0px;
+  }
+}
+
+@media (max-height: 768px) {
+  .wrapper .commentsWrapper {
+    max-height: 10vh;
+  }
+}
