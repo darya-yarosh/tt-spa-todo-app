@@ -1,3 +1,5 @@
+export type Theme = "dark" | "white";
+
 export const enum BUTTON {
     open = "Open",
     save = "Save",
@@ -6,14 +8,16 @@ export const enum BUTTON {
     return = "Return",
     add = "Add",
     cancel = "Cancel",
-    signIn = "Sign in",
-    logIn = "Log in",
+    cancelEdit = "Cancel edit",
+    close = "Close",
     reply = "Reply",
     send = "Send",
+    yes = "Yes",
+    no = "No"
 }
 
-export const enum OPTION {
-    default = " -- Select option -- ",
+export const enum MESSAGES {
+    areYouSure = "Are you sure?"
 }
 
 export const enum AppInfo {
