@@ -1,0 +1,18 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.comment__value{
+    border: 1px solid gray;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.subcomments{
+    display:flex;
+    flex-direction:column;
+    padding-left:12px;
+    gap:5px;
+}
