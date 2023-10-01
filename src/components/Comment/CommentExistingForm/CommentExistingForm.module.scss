@@ -1,0 +1,48 @@
+@import "App";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.comment {
+  border: 1px solid $color-first;
+  border-radius: 5px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.comment__content {
+  border: 1px solid $color-first;
+  border-radius: 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 4px;
+}
+
+.comment__nav {
+  display: flex;
+  gap: 4px;
+
+  button {
+    border: 1px solid gray;
+  }
+
+  .alert__text {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    margin: 0;
+    color: $color-alert;
+  }
+}
+
+.subcomments {
+  display: flex;
+  flex-direction: column;
+  padding-left: 12px;
+}
