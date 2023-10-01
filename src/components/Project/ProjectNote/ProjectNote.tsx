@@ -4,7 +4,6 @@ import Project from 'models/Project';
 import { BUTTON } from 'models/Interface';
 
 import ButtonIcon from 'components/General/ButtonIcon/ButtonIcon';
-
 import editIcon from "images/buttons/edit.svg";
 import removeIcon from "images/buttons/remove.svg";
 
@@ -24,7 +23,11 @@ export default function ProjectNote({
     const openProjectFunc = useContext(OpenProjectContext)
 
     function handlerRemoveProject() {
-        removeProject(project.id);
+        const isConfirm = window.confirm(`You want to delete project "${project.title}". Are you sure?`)
+
+        if (isConfirm) {
+            removeProject(project.id);
+        }
     }
 
     return <div className={styles.wrapper}>
