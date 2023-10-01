@@ -1,0 +1,90 @@
+@import "App";
+
+.wrapper {
+  position: fixed;
+  background: $color-third;
+  border-radius: 10px;
+  padding: 12px;
+  max-height: 90vh;
+  width: 70%;
+  max-width: 90vw;
+}
+
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+
+  p {
+    font-weight: 400;
+    font-size: 22x;
+    color: $color-first;
+    margin: 0;
+  }
+}
+
+.line {
+  display: flex;
+  height: 0px;
+
+  border: 1px solid $color-first;
+  margin: 6px 0px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0px 8px 0px;
+
+  span {
+    display: flex;
+    gap: 8px;
+
+    label {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+
+      color: $color-first;
+      margin: 0;
+    }
+  }
+}
+
+$input-border-color: gray;
+$input-border-radius: 0px;
+
+select {
+  border: 1px solid $input-border-color;
+  border-radius: $input-border-radius;
+  background: $color-second;
+}
+
+.input {
+  &__number {
+    border: 1px solid $input-border-color;
+    border-radius: $input-border-radius;
+    background: $color-second;
+
+    width: 6vw;
+    padding: 0px 12px 0px 4px;
+  }
+
+  &__string {
+    border: 1px solid $input-border-color;
+    border-radius: $input-border-radius;
+    background: $color-second;
+
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 4px;
+    width: 100%;
+  }
+}
+
+.navigation {
+  display: flex;
+  justify-content: end;
+}
