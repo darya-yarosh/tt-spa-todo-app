@@ -1,60 +1,91 @@
-import { SetStateAction, createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
+import Storage from 'models/Storage';
 import Project from 'models/Project';
 import { PageList } from 'models/Interface';
 
 import Header from 'components/General/Header/Header';
 import Footer from 'components/General/Footer/Footer';
+import Modal from 'components/General/Modal/Modal';
 import ProjectListPage from 'components/Pages/ProjectListPage/ProjectListPage';
 import ProjectPage from 'components/Pages/ProjectPage/ProjectPage';
 
+import StorageController from 'logic/storage/StorageController';
+import useToggle from 'logic/utils/use-toggle';
+
 import 'App.scss';
 
+export const UpdateStorageContext = createContext(() => { });
 export const OpenProjectContext = createContext((selectedProject: Project) => { });
-export const ProjectListContext = createContext<ProjectListContextInterface>({
-  projectList: [],
-  setProjectList: function (value: SetStateAction<Project[]>): void {
-    throw new Error('Function not implemented.');
-  }
+export const ModalContext = createContext<ModalContextProps>({
+	toggle: () => { },
+	setContent: (element: JSX.Element) => { },
 });
 
-interface ProjectListContextInterface {
-  projectList: Project[],
-  setProjectList: React.Dispatch<React.SetStateAction<Project[]>>
+interface ModalContextProps {
+	toggle: () => void,
+	setContent: (element: JSX.Element) => void
 }
 
-function App() {
-  const [projectList, setProjectList] = useState<Project[]>([]);
-  const [currentPage, setCurrentPage] = useState<PageList>(PageList.projects);
-  const [currentProject, setCurrentProject] = useState<Project>(projectList[-1]); // DEFAULT_PROJECT
+export default function App() {
+	const [modalContent, setModalContent] = useState(<></>);
+	const [isModalOpen, toggleIsModalOpen] = useToggle(false);
+	const [isLoadedData, setIsLoadedData] = useState<boolean>(false);
+	const [storage, setStorage] = useState<Storage>({ projects: [] });
+	const [currentPage, setCurrentPage] = useState<PageList>(PageList.projects);
+	const [currentProject, setCurrentProject] = useState<Project>({} as Project);
 
-  function openProjectPage(selectedProject: Project) {
-    setCurrentProject(selectedProject);
-    setCurrentPage(PageList.tasks);
-  }
-  function closeProjectPage() {
-    setCurrentProject(projectList[-1]);
-    setCurrentPage(PageList.projects);
-  }
+	function openProjectPage(selectedProject: Project) {
+		const projectIndex = storage.projects.findIndex(project => project.id === selectedProject.id);
+		setCurrentProject(storage.projects[projectIndex])
+		setCurrentPage(PageList.tasks);
+	}
+	function closeProjectPage() {
+		setCurrentProject(storage.projects[-1])
+		setCurrentPage(PageList.projects);
+	}
 
-  const ProjectListContextValue = {
-    projectList, setProjectList
-  }
+	async function loadStorageData() {
+		const storageController = new StorageController();
+		await storageController.getStorageData().then(async data => {
+			setCurrentProject(storage.projects[-1]);
+			if (data !== undefined) {
+				const currentProjectIndex = data.projects.findIndex(project => project.id === (currentProject?.id || ""))
+				setCurrentProject(data.projects[currentProjectIndex]);
 
-  return (
-    <div className="app">
-    <div className="app-wrapper">
-      <Header />
-      <ProjectListContext.Provider value={ProjectListContextValue}>
-        <OpenProjectContext.Provider value={openProjectPage}>
-          {currentPage === PageList.projects && <ProjectListPage />}
-        </OpenProjectContext.Provider>
-        {currentPage === PageList.tasks && <ProjectPage project={currentProject} returnToPrevPage={closeProjectPage} />}
-      </ProjectListContext.Provider>
-      <Footer />
-    </div>
-    </div>
-  );
+				setStorage(data);
+				setIsLoadedData(true);
+			}
+		});
+	}
+
+	const modalContextValue: ModalContextProps = {
+		toggle: toggleIsModalOpen as () => void,
+		setContent: setModalContent
+	}
+
+	if (!isLoadedData) {
+		loadStorageData();
+
+		return <div>
+			Loading...
+		</div>
+	}
+	return (
+		<div id="app" className="app">
+			<div className="app-wrapper">
+				<Header />
+				<ModalContext.Provider value={modalContextValue}>
+					<UpdateStorageContext.Provider value={loadStorageData}>
+						<OpenProjectContext.Provider value={openProjectPage}>
+							{currentPage === PageList.projects && <ProjectListPage projectList={storage.projects} />}
+						</OpenProjectContext.Provider>
+						{currentPage === PageList.tasks && <ProjectPage project={currentProject} returnToPrevPage={closeProjectPage} />}
+					</UpdateStorageContext.Provider>
+				</ModalContext.Provider>
+				<Footer />
+				{isModalOpen && <Modal handleDismiss={toggleIsModalOpen as () => void}>{modalContent}</Modal>}
+			</div>
+		</div>
+	);
 }
-
-export default App;
