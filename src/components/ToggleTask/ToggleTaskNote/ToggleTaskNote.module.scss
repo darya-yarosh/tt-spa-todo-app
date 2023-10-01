@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  gap: 4px;
+  border: 1px solid gray;
+  padding: 2px;
+  border-radius: 4px;
+
+  p {
+    margin: 0;
+  }
+}
