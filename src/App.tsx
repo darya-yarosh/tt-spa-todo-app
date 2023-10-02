@@ -23,10 +23,10 @@ export const StorageContext = createContext<StorageContextProps>({
 });
 
 interface PageControllerContextProps {
-	openProjectPage: (selectedProject: Project)=>void;
+	openProjectPage: (selectedProject: Project) => void;
 }
 export const PageControllerContext = createContext<PageControllerContextProps>({
-	openProjectPage: (selectedProject: Project)=>{ },
+	openProjectPage: (selectedProject: Project) => { },
 });
 
 interface ModalContextProps {
@@ -40,20 +40,26 @@ export const ModalContext = createContext<ModalContextProps>({
 
 
 export default function App() {
-	const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
+	const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
 	const [isModalOpen, toggleIsModalOpen] = useToggle(false);
 	const [isLoadedData, setIsLoadedData] = useState<boolean>(false);
 	const [storage, setStorage] = useState<Storage>({ projects: [] });
 	const [currentPage, setCurrentPage] = useState<PageList>(PageList.projects);
-	const [currentProject, setCurrentProject] = useState<Project>({} as Project);
+	const [currentProject, setCurrentProject] = useState<Project | null>(null);
 
 	function openProjectPage(selectedProject: Project) {
 		const projectIndex = storage.projects.findIndex(project => project.id === selectedProject.id);
+		if (projectIndex === -1) {
+			window.alert("The selected project was not found.")
+			return;
+		}
+
 		setCurrentProject(storage.projects[projectIndex])
 		setCurrentPage(PageList.tasks);
 	}
+
 	function closeProjectPage() {
-		setCurrentProject(storage.projects[-1])
+		setCurrentProject(null)
 		setCurrentPage(PageList.projects);
 	}
 
@@ -62,7 +68,12 @@ export default function App() {
 			setCurrentProject(storage.projects[-1]);
 			if (data !== undefined) {
 				const currentProjectIndex = data.projects.findIndex(project => project.id === (currentProject?.id || ""))
-				setCurrentProject(data.projects[currentProjectIndex]);
+				if (currentProjectIndex === -1) {
+					closeProjectPage()
+				} else {
+					setCurrentProject(data.projects[currentProjectIndex]);
+					setCurrentPage(PageList.tasks);
+				}
 
 				setStorage(data);
 				setIsLoadedData(true);
@@ -87,11 +98,11 @@ export default function App() {
 			<div className="app-wrapper">
 				<Header />
 				<ModalContext.Provider value={modalContextValue}>
-					<StorageContext.Provider value={{updateStorage: loadStorageData}}>
-						<PageControllerContext.Provider value={{openProjectPage: openProjectPage}}>
-							{currentPage === PageList.projects && <ProjectListPage projectList={storage.projects} />}
+					<StorageContext.Provider value={{ updateStorage: loadStorageData }}>
+						<PageControllerContext.Provider value={{ openProjectPage: openProjectPage }}>
+							{(currentPage === PageList.projects && currentProject === null) && <ProjectListPage projectList={storage.projects} />}
 						</PageControllerContext.Provider>
-						{currentPage === PageList.tasks && <ProjectPage project={currentProject} returnToPrevPage={closeProjectPage} />}
+						{currentPage === PageList.tasks && currentProject !== null && <ProjectPage project={currentProject} returnToPrevPage={closeProjectPage} />}
 					</StorageContext.Provider>
 				</ModalContext.Provider>
 				<Footer />
