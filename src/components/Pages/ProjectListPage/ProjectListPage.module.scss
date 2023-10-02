@@ -1,19 +1,22 @@
-@import "App.scss";
+@import "App";
+
+.wrapper {
+  height: 100%;
+  max-height: 85vh;
+}
 
 .header {
   display: flex;
   justify-content: start;
   align-items: center;
-  /*padding: 24px;*/
   gap: 8px;
+  margin: 8px 0px 0px 0px;
 }
 
 .title {
-  font-family: "PT Sans Caption";
   font-style: normal;
   font-weight: 400;
   font-size: 32px;
-  line-height: 41px;
 
   color: $color-first;
   margin: 0;
@@ -23,7 +26,7 @@
   display: flex;
   height: 0px;
 
-  border: 1px solid #000000;
+  border: 1px solid $color-first;
   margin: 0px 20px;
   margin: 12px 0px;
 }
@@ -31,9 +34,7 @@
 .content {
   display: flex;
   justify-content: center;
-  // margin: 16px 24px;
   margin: 16px 0px;
-  // padding: 0px 24px;
 
   display: flex;
   flex-direction: row;
@@ -42,13 +43,11 @@
   height: fit-content;
 
   .projectGrid {
-    display: flex;
+    display: grid;
     gap: 8px;
-    flex-wrap: wrap;
     justify-content: space-around;
-
-    column-count: 2;
-    column-rule: dashed;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 24px;
 
     .span {
       display: flex;
@@ -57,5 +56,27 @@
       flex-basis: 100%;
       flex: 1;
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .content .projectGrid {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    display: block;
+
+    .projectGrid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .content .projectGrid {
+    grid-template-columns: 1fr;
   }
 }
