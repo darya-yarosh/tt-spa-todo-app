@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Task, { Priority, ToggleTask, TaskStatus } from "models/Task";
+import Task, { Priority, ToggleTask, TaskStatus, isValidTask } from "models/Task";
 import { Comment } from "models/Comment";
 import { AttachedFile } from "models/AttachedFile";
 import { FormOperation, BUTTON } from "models/Interface";
@@ -40,17 +40,7 @@ export default function TaskForm({
     const priorityList: Priority[] = [Priority.low, Priority.medium, Priority.high, Priority.critical];
     const statusList: TaskStatus[] = [TaskStatus.queue, TaskStatus.development, TaskStatus.done];
 
-    function isValidTask() {
-        const isCorrectTitle = title.trim().length > 0 ? true : window.alert("Task title is empty. Please write something in title.");
-        const isCorrectWorkingHours = workingHours > 0 ? true : window.alert("The task working hours must be greater than zero.");
-        return isCorrectTitle && isCorrectWorkingHours;
-    }
-
     function handlerSendForm() {
-        if (!isValidTask()) {
-            return;
-        }
-
         const newTask: Task = {
             id: task?.id || crypto.randomUUID(),
             number: 1,
@@ -65,6 +55,10 @@ export default function TaskForm({
             attachedFiles: attachedFiles,
             comments: comments
         }
+        if (!isValidTask(newTask)) {
+            return;
+        }
+
         sendForm(newTask);
         closeForm();
     }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Project from "models/Project";
+import Project, { isValidProject } from "models/Project";
 import { BUTTON, FormOperation } from "models/Interface";
 
 import ButtonIcon from "components/General/ButtonIcon/ButtonIcon";
@@ -24,20 +24,15 @@ export default function ProjectForm({
 }: ProjectFormProps) {
     const [projectTitle, setProjectTitle] = useState<string>(project?.title || "");
 
-    function isCorrectProject() {
-        return projectTitle.trim().length > 0;
-    }
-
     function handlerSendForm() {
-        if (!isCorrectProject()) {
-            window.alert("Project title is empty. Please write something in title.");
-            return;
-        }
-
         const newProject: Project = {
             id: project?.id || crypto.randomUUID(),
             title: projectTitle,
             tasks: project?.tasks || []
+        }
+        if (!isValidProject(newProject)) {
+            window.alert("Project title is empty. Please write something in title.");
+            return;
         }
 
         sendForm(newProject);

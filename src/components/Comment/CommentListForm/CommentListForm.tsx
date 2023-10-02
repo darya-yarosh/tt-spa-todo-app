@@ -14,27 +14,21 @@ export default function CommentListForm({
     comments,
     sendForm
 }: CommentListFormProps) {
-    function addComment(commentValue: string) {
-        const newComment: Comment = {
-            id: crypto.randomUUID(),
-            value: commentValue,
-            subComments: []
-        }
-
+    function addComment(newComment: Comment) {
         const updatedComments = [...comments, newComment];
         sendForm(updatedComments)
     }
 
     function updateComment(updatedComment: Comment) {
-        const updatedCommentIndex = comments.findIndex(comment=>comment.id===updatedComment.id);
+        const updatedCommentIndex = comments.findIndex(comment => comment.id === updatedComment.id);
         const updatedComments = [...comments];
-        
-        updatedComments[updatedCommentIndex]=updatedComment;
+
+        updatedComments[updatedCommentIndex] = updatedComment;
         sendForm(updatedComments)
     }
 
     function removeComment(commentId: string) {
-        const updatedCommentIndex = comments.findIndex(comment=>comment.id===commentId);
+        const updatedCommentIndex = comments.findIndex(comment => comment.id === commentId);
         if (updatedCommentIndex === -1) {
             window.alert("The comment with the selected ID was not found.")
             return;
@@ -47,9 +41,9 @@ export default function CommentListForm({
 
     return <div className={styles.wrapper}>
         <div className={styles.commentsWrapper}>
-        {comments.map(comment =>
-            <CommentExistingForm key={comment.id} comment={comment} updateComment={updateComment} removeComment={removeComment}/>
-        )}
+            {comments.map(comment =>
+                <CommentExistingForm key={comment.id} comment={comment} updateComment={updateComment} removeComment={removeComment} />
+            )}
         </div>
         {<CommentForm sendForm={addComment} />}
     </div>

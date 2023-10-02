@@ -34,3 +34,9 @@ export interface ToggleTask {
     status: boolean,
     value: string,
 }
+
+export function isValidTask(task: Task) {
+    const isCorrectTitle = task.title.trim().length > 0 ? true : window.alert("Task title is empty. Please write something in title.");
+    const isCorrectWorkingHours = task.workingHours > 0 ? true : window.alert("The task working hours must be greater than zero.");
+    return isCorrectTitle && isCorrectWorkingHours;
+}

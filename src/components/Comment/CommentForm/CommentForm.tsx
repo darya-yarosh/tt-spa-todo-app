@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 import { BUTTON } from "models/Interface";
-import { Comment } from "models/Comment";
+import { Comment, isValidComment } from "models/Comment";
 
 import styles from "components/Comment/CommentForm/CommentForm.module.scss";
 
 interface CommentFormProps {
     comment?: Comment,
-    sendForm: (commentValue: string) => void,
+    sendForm: (comment: Comment) => void,
 }
 
 export default function CommentForm({
@@ -16,17 +16,18 @@ export default function CommentForm({
 }: CommentFormProps) {
     const [value, setValue] = useState<string>(comment === undefined ? "" : comment.value);
 
-    function isValidComment() {
-        return value.trim().length > 0
-    }
-
     function handlerSendForm() {
-        if (!isValidComment()) {
+        const newComment: Comment = {
+            id: comment?.id || crypto.randomUUID(),
+            value: value,
+            subComments: comment?.subComments || []
+        }
+        if (!isValidComment(newComment)) {
             window.alert("Comment is empty. Please write something to send.")
             return;
         }
 
-        sendForm(value);
+        sendForm(newComment);
         setValue("");
     }
 

@@ -5,3 +5,8 @@ export default interface Project {
     title: string,
     tasks: Task[]
 }
+
+export function isValidProject(project: Project) {
+    const isCorrectTitle = project.title.trim().length > 0;
+    return isCorrectTitle;
+}
