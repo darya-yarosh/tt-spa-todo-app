@@ -94,7 +94,7 @@ export default function TaskForm({
             </span>
             <span>
                 <label>Description:</label>
-                <input className={styles.input__string} type="text" placeholder="This is task description." maxLength={255}
+                <textarea className={styles.input__string} placeholder="This is task description." maxLength={255}
                     value={desc}
                     onChange={(event) => setDesc(event.target.value)} />
             </span>
