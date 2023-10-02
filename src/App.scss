@@ -16,28 +16,6 @@
 
 .dark-theme {
   --color-first: white;
-  --color-second: #1c1c1c; //--color-second: #2e2e2e;
-  --color-third: #373737; //--color-third: #1e1e1e;
-  --shadow-object: #ffffff40;
-  --shadow-modal: hsl(0deg 0% 67.72% / 75%);
-  --color-alert: #ff6969;
-  --filter-first: var(--filter-black);
-  --filter-second: var(--filter-white);
-}
-
-.dark-red-theme {
-  --color-first: #ff6969;
-  --color-second: #1c1c1c;
-  --color-third: #373737;
-  --shadow-object: #ffffff40;
-  --shadow-modal: hsl(0deg 0% 67.72% / 75%);
-  --color-alert: white;
-  --filter-first: var(--filter-black);
-  --filter-second: var(--filter-white);
-}
-
-.dark-blue-theme {
-  --color-first: #8369ff;
   --color-second: #1c1c1c;
   --color-third: #373737;
   --shadow-object: #ffffff40;
@@ -101,6 +79,7 @@ body {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
-select, input {
+select,
+input {
   color: $color-first;
 }
