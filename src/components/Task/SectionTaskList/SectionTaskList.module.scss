@@ -1,0 +1,53 @@
+@import "App";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  background: $color-third;
+  border-radius: 10px;
+  flex-shrink: 0;
+  padding: 10px;
+  border: 1px solid $color-first;
+  max-height: 80vh;
+  width: fit-content;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  font-weight: 400;
+  font-size: 20px;
+  color: $color-first;
+  margin: 0;
+}
+
+.line {
+  display: flex;
+  height: 0px;
+
+  border: 1px solid $color-first;
+  margin: 8px 20px;
+  width: 90%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 16px;
+  background: $color-third;
+
+  width: 260px;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 10px 0px;
+  }
+  .content {
+    padding: 10px 12px 10px 4px;
+  }
+}
