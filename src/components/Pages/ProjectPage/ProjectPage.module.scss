@@ -1,0 +1,106 @@
+@import "App";
+
+.wrapper {
+  height: 100%;
+  max-height: 85vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 8px 0px;
+  gap: 8px;
+
+  .span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+
+  color: $color-first;
+  margin: 0;
+}
+
+.line {
+  display: flex;
+  height: 0px;
+
+  border: 1px solid $color-first;
+  margin: 12px 0px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  width: 100%;
+  height: fit-content;
+  max-height: 80vh;
+
+  .grid {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+
+    column-count: 3;
+    column-rule: dashed;
+    overflow-x: auto;
+    width: 95vw;
+    max-height: 70vh;
+
+    .span {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      flex-basis: 100%;
+      flex: 1;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content .grid {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+  }
+}
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+
+    span {
+      width: 100%;
+    }
+  }
+
+  .title {
+    display: block;
+    width: auto;
+  }
+}
