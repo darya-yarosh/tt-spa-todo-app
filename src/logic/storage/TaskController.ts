@@ -4,11 +4,14 @@ import ProjectController from "logic/storage/ProjectController";
 
 export class TaskControllerClass {
     async createTask(projectId: string, newTask: Task) {
-        const project = await ProjectController.getProject(projectId);
+        const updatedProject = await ProjectController.getProject(projectId);
 
         if (newTask.id === "") newTask.id = crypto.randomUUID();
-        project.tasks.push(newTask)
-        await ProjectController.setProject(projectId, project);
+        const lastProjectTask = updatedProject.tasks[updatedProject.tasks.length - 1];
+        newTask.number = lastProjectTask !== undefined ? (lastProjectTask.number + 1) : 1;
+
+        updatedProject.tasks.push(newTask)
+        await ProjectController.setProject(projectId, updatedProject);
     }
 
     async removeTask(projectId: string, taskId: string) {

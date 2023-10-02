@@ -28,7 +28,6 @@ export default function TaskForm({
     sendForm,
     closeForm,
 }: TaskFormProps) {
-    const [number, setNumber] = useState<number>(task?.number || 1);
     const [title, setTitle] = useState<string>(task?.title || "");
     const [description, setDescription] = useState<string>(task?.description || "");
     const [workingHours, setWorkingHours] = useState<number>(task?.workingHours || 1);
@@ -42,10 +41,9 @@ export default function TaskForm({
     const statusList: TaskStatus[] = [TaskStatus.queue, TaskStatus.development, TaskStatus.done];
 
     function isValidTask() {
-        const isCorrectNumber = number > 0 ? true : window.alert("The task number must be greater than zero.");
         const isCorrectTitle = title.trim().length > 0 ? true : window.alert("Task title is empty. Please write something in title.");
         const isCorrectWorkingHours = workingHours > 0 ? true : window.alert("The task working hours must be greater than zero.");
-        return isCorrectNumber && isCorrectTitle && isCorrectWorkingHours;
+        return isCorrectTitle && isCorrectWorkingHours;
     }
 
     function handlerSendForm() {
@@ -55,7 +53,7 @@ export default function TaskForm({
 
         const newTask: Task = {
             id: task?.id || crypto.randomUUID(),
-            number: number,
+            number: 1,
             title: title,
             description: description,
             dateCreated: task?.dateCreated || new Date().toLocaleDateString('ru-RU'),
@@ -80,12 +78,6 @@ export default function TaskForm({
         </div>
         <span className={styles.line} />
         <div className={styles.content}>
-            <span>
-                <label>Number:</label>
-                <input className={styles.input__number} type="number" placeholder="1" min={1}
-                    value={number}
-                    onChange={(event) => setNumber(Number(event.target.value))} />
-            </span>
             <span>
                 <label>Title:</label>
                 <input className={styles.input__string} type="text" placeholder="№1 Task name" minLength={1} maxLength={50}
