@@ -1,7 +1,7 @@
 import styles from "components/General/Modal/Modal.module.scss";
 
 interface ModalProps {
-    handleDismiss: ()=>void,
+    handleDismiss: () => void,
     children?: React.ReactNode,
 }
 
