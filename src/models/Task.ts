@@ -11,7 +11,7 @@ export default interface Task {
     dateEnded: string,
     priority: Priority,
     status: TaskStatus,
-    subtasks: ToggleTask[],
+    subtasks: Subtask[],
     attachedFiles: AttachedFile[],
     comments: Comment[],
 }
@@ -29,7 +29,7 @@ export enum TaskStatus {
     done = "Done",
 }
 
-export interface ToggleTask {
+export interface Subtask {
     id: string,
     status: boolean,
     value: string,

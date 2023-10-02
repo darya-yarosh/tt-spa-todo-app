@@ -5,7 +5,7 @@ import { BUTTON, FormOperation } from "models/Interface";
 
 import TaskForm from "components/Task/TaskForm/TaskForm";
 import AttachedFileList from "components/AttachedFiles/AttachedFileList/AttachedFileList";
-import ToggleTaskList from "components/ToggleTask/ToggleTaskList/ToggleTaskList";
+import SubtaskList from "components/Subtask/SubtaskList/SubtaskList";
 import CommentList from "components/Comment/CommentList/CommentList";
 
 import ButtonIcon from "components/General/ButtonIcon/ButtonIcon";
@@ -129,7 +129,7 @@ export default function TaskNote({
             </span>
             <span className={styles.property}>
                 <label className={styles.label}>{TaskParameters.subtasks}:</label>
-                <ToggleTaskList taskList={task.subtasks} />
+                <SubtaskList taskList={task.subtasks} />
             </span>
             <span className={styles.property}>
                 <label className={styles.label}>{TaskParameters.comments}:</label>

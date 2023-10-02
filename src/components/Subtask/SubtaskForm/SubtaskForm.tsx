@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
 
-import { ToggleTask } from "models/Task";
+import { Subtask } from "models/Task";
 
 import ButtonIcon from "components/General/ButtonIcon/ButtonIcon";
 import removeIcon from "images/buttons/remove.svg";
 
-import styles from "components/ToggleTask/ToggleTaskForm/ToggleTaskForm.module.scss";
+import styles from "components/Subtask/SubtaskForm/SubtaskForm.module.scss";
 
-interface ToggleTaskFormProps {
-    task?: ToggleTask;
-    sendForm: (newTask: ToggleTask) => void;
+interface SubtaskFormProps {
+    task?: Subtask;
+    sendForm: (newTask: Subtask) => void;
     removeTask?: (taskId: string) => void;
 }
 
-export default function ToggleTaskForm({
+export default function SubtaskForm({
     task,
     sendForm,
     removeTask
-}: ToggleTaskFormProps) {
+}: SubtaskFormProps) {
     const [taskValue, setTaskValue] = useState<string>(task?.value || "");
     const [taskStatus, setTaskStatus] = useState<boolean>(task?.status || false);
 
     function handlerSendForm() {
         if (taskValue.length > 0) {
-            const newTask: ToggleTask = {
+            const newTask: Subtask = {
                 id: task?.id || crypto.randomUUID(),
                 status: taskStatus,
                 value: taskValue
@@ -51,7 +51,7 @@ export default function ToggleTaskForm({
         }
     }
 
-    const placeholder = task === undefined ? "Tap 'Enter' to add toggle task" : ""
+    const placeholder = task === undefined ? "Tap 'Enter' to add subtask" : ""
 
     useEffect(() => {
         handlerSendForm();
@@ -61,6 +61,6 @@ export default function ToggleTaskForm({
     return <div className={styles.wrapper} >
         <input type="checkbox" checked={taskStatus} disabled={task === undefined} onChange={editTaskStatus} />
         <textarea minLength={1} placeholder={placeholder} onChange={(event) => setTaskValue(event.target.value)} onKeyDown={handleKeyDown} value={taskValue} />
-        {task?.id !== undefined && <ButtonIcon iconSVG={removeIcon} caption={"Button for delete current toggle task"} onClick={handlerRemoveTask} />}
+        {task?.id !== undefined && <ButtonIcon iconSVG={removeIcon} caption={"Button for delete current subtask"} onClick={handlerRemoveTask} />}
     </div>
 }

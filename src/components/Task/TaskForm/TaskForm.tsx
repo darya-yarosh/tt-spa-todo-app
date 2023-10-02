@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import Task, { Priority, ToggleTask, TaskStatus, isValidTask, TaskParameters, TaskInterface } from "models/Task";
+import Task, { Priority, Subtask, TaskStatus, isValidTask, TaskParameters, TaskInterface } from "models/Task";
 import { Comment } from "models/Comment";
 import { AttachedFile } from "models/AttachedFile";
 import { FormOperation, BUTTON } from "models/Interface";
 
-import ToggleTaskListForm from "components/ToggleTask/ToggleTaskListForm/ToggleTaskListForm";
+import SubtaskListForm from "components/Subtask/SubtaskListForm/SubtaskListForm";
 import AttachedFileListForm from "components/AttachedFiles/AttachedFileListForm/AttachedFileListForm";
 import CommentListForm from "components/Comment/CommentListForm/CommentListForm";
 
@@ -34,7 +34,7 @@ export default function TaskForm({
     const [priority, setPriority] = useState<Priority>(task?.priority || Priority.low);
     const [status, setStatus] = useState<TaskStatus>(task?.status || TaskStatus.queue)
     const [attachedFiles, setAttachedFiles] = useState<AttachedFile[]>(task?.attachedFiles || []);
-    const [subtasks, setSubtasks] = useState<ToggleTask[]>(task?.subtasks || []);
+    const [subtasks, setSubtasks] = useState<Subtask[]>(task?.subtasks || []);
     const [comments, setComments] = useState<Comment[]>(task?.comments || []);
 
     const priorityList: Priority[] = [Priority.low, Priority.medium, Priority.high, Priority.critical];
@@ -114,7 +114,7 @@ export default function TaskForm({
             </span>
             <span>
                 <label>{TaskParameters.subtasks}:</label>
-                <ToggleTaskListForm taskList={subtasks} sendForm={setSubtasks} />
+                <SubtaskListForm taskList={subtasks} sendForm={setSubtasks} />
             </span>
             <span>
                 <label>{TaskParameters.comments}:</label>

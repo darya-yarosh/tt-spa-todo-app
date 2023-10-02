@@ -1,24 +1,24 @@
-import { ToggleTask } from "models/Task";
+import { Subtask } from "models/Task";
 
-import ToffleTaskForm from "components/ToggleTask/ToggleTaskForm/ToggleTaskForm";
+import SubtaskForm from "components/Subtask/SubtaskForm/SubtaskForm";
 
-import styles from "components/ToggleTask/ToggleTaskListForm/ToggleTaskListForm.module.scss";
+import styles from "components/Subtask/SubtaskListForm/SubtaskListForm.module.scss";
 
-interface ToggleTaskListFormProps {
-    taskList: ToggleTask[];
-    sendForm: (taskList: ToggleTask[]) => void;
+interface SubtaskListFormProps {
+    taskList: Subtask[];
+    sendForm: (taskList: Subtask[]) => void;
 }
 
-export default function ToggleTaskListForm({
+export default function SubtaskListForm({
     taskList,
     sendForm,
-}: ToggleTaskListFormProps) {
-    function addNewTask(newTask: ToggleTask) {
+}: SubtaskListFormProps) {
+    function addNewTask(newTask: Subtask) {
         const updatedTasks = [...taskList, newTask]
         sendForm(updatedTasks)
     }
 
-    function editTask(newTask: ToggleTask) {
+    function editTask(newTask: Subtask) {
         const updatedTaskIndex = taskList.findIndex(task => task.id === newTask.id);
 
         const updatedTaskList = [...taskList]
@@ -35,9 +35,9 @@ export default function ToggleTaskListForm({
     return <div className={styles.wrapper}>
         <div className={styles.taskListWrapper}>
             {taskList.map(task =>
-                <ToffleTaskForm key={task.id} task={task} removeTask={removeTask} sendForm={editTask} />
+                <SubtaskForm key={task.id} task={task} removeTask={removeTask} sendForm={editTask} />
             )}
         </div>
-        <ToffleTaskForm sendForm={addNewTask} />
+        <SubtaskForm sendForm={addNewTask} />
     </div>
 }
