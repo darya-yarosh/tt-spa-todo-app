@@ -43,8 +43,11 @@ export default function AttachedFileListForm({
     function handlerRemoveAttachedFile(fileId: string) {
         const updatedAttachedFiles = [...attachedFileList];
         const fileIndex = updatedAttachedFiles.findIndex(attachedFile => attachedFile.id === fileId)
+        if (fileIndex === -1) {
+            window.alert("The file with the selected ID was not found.")
+            return;
+        }
 
-        if (fileIndex === -1) return;
         updatedAttachedFiles.splice(fileIndex, 1);
         setAttachedFileList(updatedAttachedFiles);
     }

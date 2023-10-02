@@ -59,6 +59,11 @@ export default function CommentExistingForm({
 
     function handlerRemoveSubcomment(subCommentId: string) {
         const subcommentIndex = comment.subComments.findIndex(subcomment => subcomment.id === subCommentId);
+        if (subcommentIndex === -1) {
+            window.alert("The subcomment with the selected ID was not found.")
+            return;
+        }
+
         const updatedComment: Comment = { ...comment };
         updatedComment.subComments = updatedComment.subComments.splice(subcommentIndex, 1);
         updateComment(updatedComment);

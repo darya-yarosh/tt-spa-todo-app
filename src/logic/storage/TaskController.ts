@@ -13,8 +13,12 @@ export class TaskControllerClass {
 
     async removeTask(projectId: string, taskId: string) {
         const updatedProject = await ProjectController.getProject(projectId);
-
         const taskIndex = updatedProject.tasks.findIndex(task => task.id === taskId);
+        if (taskIndex === -1) {
+            window.alert("The task with the selected ID was not found.")
+            return;
+        }
+
         updatedProject.tasks.splice(taskIndex, 1);
         await ProjectController.setProject(projectId, updatedProject);
     }

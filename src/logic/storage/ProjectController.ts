@@ -14,6 +14,11 @@ export class ProjectControllerClass {
     async removeProject(projectId: string) {
         const updatedProjectList = await this.getProjectList();
         const projectIndex = updatedProjectList.findIndex(project => project.id === projectId);
+        if (projectIndex === -1) {
+            window.alert("The project with the selected ID was not found.")
+            return;
+        }
+        
         updatedProjectList.splice(projectIndex, 1)
         await this.setProjectList(updatedProjectList);
     }

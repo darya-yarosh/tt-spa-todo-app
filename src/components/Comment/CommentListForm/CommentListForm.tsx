@@ -35,8 +35,12 @@ export default function CommentListForm({
 
     function handlerRemoveComment(commentId: string) {
         const updatedCommentIndex = comments.findIndex(comment=>comment.id===commentId);
+        if (updatedCommentIndex === -1) {
+            window.alert("The comment with the selected ID was not found.")
+            return;
+        }
+
         const updatedComments = [...comments];
-        
         updatedComments.splice(updatedCommentIndex, 1);
         updateComments(updatedComments)
     }
