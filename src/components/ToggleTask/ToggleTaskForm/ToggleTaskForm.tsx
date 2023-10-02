@@ -39,13 +39,13 @@ export default function ToggleTaskForm({
         }
     };
 
-    function handlerEditTaskStatus() {
+    function editTaskStatus() {
         setTaskStatus(currentValue => !currentValue);
     }
 
-
     function handlerRemoveTask() {
         const taskId = task === undefined ? "" : task.id;
+        
         if (task !== undefined && removeTask !== undefined) {
             removeTask(taskId)
         }
@@ -59,7 +59,7 @@ export default function ToggleTaskForm({
     }, [taskStatus])
 
     return <div className={styles.wrapper} >
-        <input type="checkbox" checked={taskStatus} disabled={task === undefined} onChange={handlerEditTaskStatus} />
+        <input type="checkbox" checked={taskStatus} disabled={task === undefined} onChange={editTaskStatus} />
         <textarea minLength={1} placeholder={placeholder} onChange={(event) => setTaskValue(event.target.value)} onKeyDown={handleKeyDown} value={taskValue} />
         {task?.id !== undefined && <ButtonIcon iconSVG={removeIcon} caption={"Button for delete current toggle task"} onClick={handlerRemoveTask} />}
     </div>

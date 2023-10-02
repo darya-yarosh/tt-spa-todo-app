@@ -45,23 +45,23 @@ export default function ProjectPage({
         modal.setContent(<ProjectForm
             project={project}
             operationTitle={FormOperation.create}
-            sendForm={handlerSendFormProject}
+            sendForm={sendFormProject}
             closeForm={modal.closeModal} />)
         modal.openModal();
     }
 
-    function handlerOpenTaskForm() {
+    function openTaskForm() {
         modal.setContent(<TaskForm operationTitle={FormOperation.create}
-            sendForm={handlerCreateTask}
+            sendForm={createTask}
             closeForm={modal.closeModal} />)
         modal.openModal();
     }
 
-    async function handlerCreateTask(newTask: Task) {
+    async function createTask(newTask: Task) {
         await TaskController.createTask(project.id, newTask).then(storageContext.updateStorage)
     }
 
-    async function handlerSendFormProject(newProject: Project) {
+    async function sendFormProject(newProject: Project) {
         await ProjectController.setProject(project.id, newProject).then(storageContext.updateStorage);
     }
 
@@ -84,7 +84,7 @@ export default function ProjectPage({
                 />
                 <p className={styles.title}>{PageList.tasks}</p>
                 <ButtonIcon iconSVG={plusIcon} caption={"Button for adding new task."}
-                    onClick={handlerOpenTaskForm} />
+                    onClick={openTaskForm} />
             </span>
         </div>
         <span className={styles.line} />

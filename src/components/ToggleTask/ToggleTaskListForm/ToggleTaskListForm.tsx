@@ -13,12 +13,12 @@ export default function ToggleTaskListForm({
     taskList,
     sendForm,
 }: ToggleTaskListFormProps) {
-    function handlerAddNewTask(newTask: ToggleTask) {
+    function addNewTask(newTask: ToggleTask) {
         const updatedTasks = [...taskList, newTask]
         sendForm(updatedTasks)
     }
 
-    function handlerEditTask(newTask: ToggleTask) {
+    function editTask(newTask: ToggleTask) {
         const updatedTaskIndex = taskList.findIndex(task => task.id === newTask.id);
 
         const updatedTaskList = [...taskList]
@@ -27,7 +27,7 @@ export default function ToggleTaskListForm({
         sendForm(updatedTaskList);
     }
 
-    function handlerRemoveTask(taskId: string) {
+    function removeTask(taskId: string) {
         const updatedTaskList = taskList.filter(task => task.id !== taskId);
         sendForm(updatedTaskList);
     }
@@ -35,9 +35,9 @@ export default function ToggleTaskListForm({
     return <div className={styles.wrapper}>
         <div className={styles.taskListWrapper}>
             {taskList.map(task =>
-                <ToffleTaskForm key={task.id} task={task} removeTask={handlerRemoveTask} sendForm={handlerEditTask} />
+                <ToffleTaskForm key={task.id} task={task} removeTask={removeTask} sendForm={editTask} />
             )}
         </div>
-        <ToffleTaskForm sendForm={handlerAddNewTask} />
+        <ToffleTaskForm sendForm={addNewTask} />
     </div>
 }

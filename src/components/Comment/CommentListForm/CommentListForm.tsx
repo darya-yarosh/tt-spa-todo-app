@@ -7,14 +7,14 @@ import styles from "components/Comment/CommentListForm/CommentListForm.module.sc
 
 interface CommentListFormProps {
     comments: Comment[],
-    updateComments: (comments: Comment[]) => void,
+    sendForm: (comments: Comment[]) => void,
 }
 
 export default function CommentListForm({
     comments,
-    updateComments
+    sendForm
 }: CommentListFormProps) {
-    function handlerAddComment(commentValue: string) {
+    function addComment(commentValue: string) {
         const newComment: Comment = {
             id: crypto.randomUUID(),
             value: commentValue,
@@ -22,18 +22,18 @@ export default function CommentListForm({
         }
 
         const updatedComments = [...comments, newComment];
-        updateComments(updatedComments)
+        sendForm(updatedComments)
     }
 
-    function handlerUpdateComment(updatedComment: Comment) {
+    function updateComment(updatedComment: Comment) {
         const updatedCommentIndex = comments.findIndex(comment=>comment.id===updatedComment.id);
         const updatedComments = [...comments];
         
         updatedComments[updatedCommentIndex]=updatedComment;
-        updateComments(updatedComments)
+        sendForm(updatedComments)
     }
 
-    function handlerRemoveComment(commentId: string) {
+    function removeComment(commentId: string) {
         const updatedCommentIndex = comments.findIndex(comment=>comment.id===commentId);
         if (updatedCommentIndex === -1) {
             window.alert("The comment with the selected ID was not found.")
@@ -42,15 +42,15 @@ export default function CommentListForm({
 
         const updatedComments = [...comments];
         updatedComments.splice(updatedCommentIndex, 1);
-        updateComments(updatedComments)
+        sendForm(updatedComments)
     }
 
     return <div className={styles.wrapper}>
         <div className={styles.commentsWrapper}>
         {comments.map(comment =>
-            <CommentExistingForm key={comment.id} comment={comment} updateComment={handlerUpdateComment} removeComment={handlerRemoveComment}/>
+            <CommentExistingForm key={comment.id} comment={comment} updateComment={updateComment} removeComment={removeComment}/>
         )}
         </div>
-        {<CommentForm sendForm={handlerAddComment} />}
+        {<CommentForm sendForm={addComment} />}
     </div>
 }

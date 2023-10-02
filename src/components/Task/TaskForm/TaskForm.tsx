@@ -124,7 +124,7 @@ export default function TaskForm({
             </span>
             <span>
                 <label>Comments:</label>
-                <CommentListForm comments={comments} updateComments={(comments: Comment[]) => setComments(comments)} />
+                <CommentListForm comments={comments} sendForm={(comments: Comment[]) => setComments(comments)} />
             </span>
         </div>
         <div className={styles.navigation}>

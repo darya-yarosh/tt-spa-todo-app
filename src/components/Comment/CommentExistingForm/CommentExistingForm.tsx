@@ -26,25 +26,25 @@ export default function CommentExistingForm({
     const replyText = isOpenReplyForm ? BUTTON.cancel : BUTTON.reply;
     const editText = isOpenEditForm ? BUTTON.cancelEdit : BUTTON.edit;
 
-    function handlerOpenReplyComment() {
+    function toggleCommentReplyFormStatus() {
         setIsOpenReplyForm(currentValue => !currentValue);
     }
 
-    function handlerEditComment() {
+    function toggleCommentEditFormStatus() {
         setIsOpenEditForm(currentValue => !currentValue);
     }
 
-    function handlerSaveEditingComment() {
+    function saveEditingComment() {
         const updatedComment: Comment = { ...comment };
         updatedComment.value = commentValue;
         updateComment(updatedComment);
     }
 
-    function handlerRemoveComment() {
+    function toggleCommentRemoveNav() {
         setIsRemovingComment(currentValue => !currentValue);
     }
 
-    function handlerSendReplyComment() {
+    function sendReplyComment() {
         const updatedComment: Comment = { ...comment };
         const newReplyComment: Comment = {
             id: crypto.randomUUID(),
@@ -54,10 +54,10 @@ export default function CommentExistingForm({
         setReplyComment("");
         updatedComment.subComments.push(newReplyComment);
         updateComment(updatedComment);
-        handlerOpenReplyComment()
+        toggleCommentReplyFormStatus()
     }
 
-    function handlerRemoveSubcomment(subCommentId: string) {
+    function removeSubcomment(subCommentId: string) {
         const subcommentIndex = comment.subComments.findIndex(subcomment => subcomment.id === subCommentId);
         if (subcommentIndex === -1) {
             window.alert("The subcomment with the selected ID was not found.")
@@ -74,17 +74,17 @@ export default function CommentExistingForm({
             {isOpenEditForm && <textarea className={styles.comment__content} value={commentValue} onChange={(event) => setCommentValue(event.target.value)} />}
             {!isOpenEditForm && <div className={styles.comment__content}>{comment.value}</div>}
             <div className={styles.comment__nav}>
-                <button type="button" disabled={isOpenEditForm || isRemovingComment} onClick={handlerRemoveComment}>Remove</button>
-                <button type="button" onClick={handlerOpenReplyComment}>{replyText}</button>
-                <button type="button" onClick={handlerEditComment}>{editText}</button>
+                <button type="button" disabled={isOpenEditForm || isRemovingComment} onClick={toggleCommentRemoveNav}>Remove</button>
+                <button type="button" onClick={toggleCommentReplyFormStatus}>{replyText}</button>
+                <button type="button" onClick={toggleCommentEditFormStatus}>{editText}</button>
                 {isRemovingComment && <p className={styles.alert__text}>
                     <>
                         {MESSAGES.areYouSure}
-                        <button onClick={handlerRemoveComment}>{BUTTON.no}</button>
+                        <button onClick={toggleCommentRemoveNav}>{BUTTON.no}</button>
                         <button onClick={() => { removeComment(comment.id) }}>{BUTTON.yes}</button>
                     </>
                 </p>}
-                {isOpenEditForm && <button type="button" onClick={handlerSaveEditingComment}>Save</button>}
+                {isOpenEditForm && <button type="button" onClick={saveEditingComment}>Save</button>}
             </div>
         </section>
         <section className={styles.subcomments}>
@@ -92,8 +92,8 @@ export default function CommentExistingForm({
                 <section className={styles.comment}>
                     <input className={styles.comment__content} value={replyComment} onChange={(event) => setReplyComment(event.target.value)} />
                     <div className={styles.comment__nav}>
-                        <button type="button" onClick={handlerOpenReplyComment}>{BUTTON.close}</button>
-                        <button type="button" onClick={handlerSendReplyComment}>{BUTTON.send}</button>
+                        <button type="button" onClick={toggleCommentReplyFormStatus}>{BUTTON.close}</button>
+                        <button type="button" onClick={sendReplyComment}>{BUTTON.send}</button>
                     </div>
                 </section>
             }</>}
@@ -101,7 +101,7 @@ export default function CommentExistingForm({
                 <CommentExistingForm key={subComment.id}
                     comment={subComment}
                     updateComment={updateComment}
-                    removeComment={handlerRemoveSubcomment} />
+                    removeComment={removeSubcomment} />
             )}
         </section>
     </div>

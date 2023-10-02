@@ -25,25 +25,25 @@ export default function ProjectListPage({
     const modal = useContext(ModalContext);
     const storageContext = useContext(StorageContext)
 
-    function handlerOpenProjectForm() {
+    function openProjectForm() {
         modal.setContent(<ProjectForm operationTitle={FormOperation.create}
-            sendForm={handlerSendFormProject}
+            sendForm={sendFormProject}
             closeForm={modal.closeModal} />)
         modal.openModal();
     }
 
-    async function handlerSendFormProject(newProject: Project) {
+    async function sendFormProject(newProject: Project) {
         await ProjectController.createProject(newProject).then(storageContext.updateStorage);
     }
 
-    async function handlerRemoveProject(removeId: string) {
+    async function removeProject(removeId: string) {
         await ProjectController.removeProject(removeId).then(storageContext.updateStorage);
     }
 
     return <div className={styles.wrapper}>
         <div className={styles.header}>
             <p className={styles.title}>{PageList.projects}</p>
-            <ButtonIcon iconSVG={plusIcon} caption={"Button for adding new project."} onClick={handlerOpenProjectForm} />
+            <ButtonIcon iconSVG={plusIcon} caption={"Button for adding new project."} onClick={openProjectForm} />
         </div>
         <span className={styles.line} />
         <div className={styles.content}>
@@ -52,7 +52,7 @@ export default function ProjectListPage({
                     <span key={project.id} className={styles.span}>
                         <ProjectNote key={project.id}
                             project={project}
-                            removeProject={handlerRemoveProject} />
+                            removeProject={removeProject} />
                     </span>
                 )}
             </div>

@@ -18,7 +18,7 @@ export default function AttachedFileListForm({
 }: AttachedFileListFormProps) {
     const [attachedFileList, setAttachedFileList] = useState<AttachedFile[]>(noteAttachedFiles);
 
-    function handlerAddFile(newFile: FileList | null) {
+    function addAttachedFile(newFile: FileList | null) {
         if (newFile === null) return;
         
         const keys = Object.keys(newFile)
@@ -40,7 +40,7 @@ export default function AttachedFileListForm({
         )
     }
 
-    function handlerRemoveAttachedFile(fileId: string) {
+    function removeAttachedFile(fileId: string) {
         const updatedAttachedFiles = [...attachedFileList];
         const fileIndex = updatedAttachedFiles.findIndex(attachedFile => attachedFile.id === fileId)
         if (fileIndex === -1) {
@@ -75,12 +75,12 @@ export default function AttachedFileListForm({
                             <td>{attachedFile.file.type}</td>
                             <td>{attachedFile.file.size}</td>
                             <td>{new Date(attachedFile.file.lastModified).toDateString()}</td>
-                            <td><ButtonIcon iconSVG={removeIcon} caption="Button for removing current file." onClick={() => handlerRemoveAttachedFile(attachedFile.id)} /></td>
+                            <td><ButtonIcon iconSVG={removeIcon} caption="Button for removing current file." onClick={() => removeAttachedFile(attachedFile.id)} /></td>
                         </tr>
                     )}
                 </tbody>
             </table>
         </div>
-        <input className={styles.button} type="file" multiple onChange={(e) => { handlerAddFile(e.target.files) }} />
+        <input className={styles.button} type="file" multiple onChange={(e) => { addAttachedFile(e.target.files) }} />
     </div>
 }

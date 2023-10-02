@@ -32,7 +32,7 @@ export default function TaskNote({
 
     const sectionInfoList = useContext(SectionInfoListContext);
 
-    function handlerOpenEditForm() {
+    function openEditForm() {
         modal.setContent(<TaskForm
             task={task}
             operationTitle={FormOperation.create}
@@ -105,7 +105,7 @@ export default function TaskNote({
     return <div ref={ref} className={styles.wrapper} draggable="true">
         <div className={styles.header}>
             <span>
-                <ButtonIcon iconSVG={editIcon} caption={BUTTON.edit} onClick={handlerOpenEditForm} />
+                <ButtonIcon iconSVG={editIcon} caption={BUTTON.edit} onClick={openEditForm} />
                 <p>{task.number} | {task.title}</p>
             </span>
             <span>
