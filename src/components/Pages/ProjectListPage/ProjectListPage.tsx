@@ -13,7 +13,7 @@ import ProjectController from "logic/storage/ProjectController";
 
 import styles from "components/Pages/ProjectListPage/ProjectListPage.module.scss";
 
-import { ModalContext, UpdateStorageContext } from "App";
+import { ModalContext, StorageContext } from "App";
 
 interface ProjectListProps {
     projectList: Project[];
@@ -23,8 +23,7 @@ export default function ProjectListPage({
     projectList
 }: ProjectListProps) {
     const modal = useContext(ModalContext);
-
-    const updateStorageContext = useContext(UpdateStorageContext)
+    const storageContext = useContext(StorageContext)
 
     function handlerOpenProjectForm() {
         modal.setContent(<ProjectForm operationTitle={FormOperation.create}
@@ -35,12 +34,12 @@ export default function ProjectListPage({
 
     async function handlerSendFormProject(newProject: Project) {
         const projectController = new ProjectController();
-        await projectController.createProject(newProject).then(updateStorageContext);
+        await projectController.createProject(newProject).then(storageContext.updateStorage);
     }
 
     function handlerRemoveProject(removeId: string) {
         const projectController = new ProjectController();
-        projectController.removeProject(removeId).then(updateStorageContext);
+        projectController.removeProject(removeId).then(storageContext.updateStorage);
 
     }
 

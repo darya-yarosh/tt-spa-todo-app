@@ -21,7 +21,7 @@ import ProjectController from "logic/storage/ProjectController";
 
 import styles from "components/Pages/ProjectPage/ProjectPage.module.scss";
 
-import { ModalContext, UpdateStorageContext } from "App";
+import { ModalContext, StorageContext } from "App";
 
 export const SectionInfoListContext = createContext<SectionInfo[]>([]);
 
@@ -38,11 +38,11 @@ export default function ProjectPage({
 
     const [searchFilter, setSearchFilter] = useState<string>("");
     const [taskList, setTaskList] = useState<Task[]>(project.tasks)
-    const updateStorageContext = useContext(UpdateStorageContext)
+    const storageContext = useContext(StorageContext)
 
     async function handlerSendFormProject(newProject: Project) {
         const projectController = new ProjectController();
-        await projectController.setProject(project.id, newProject).then(updateStorageContext);
+        await projectController.setProject(project.id, newProject).then(storageContext.updateStorage);
     }
 
     function handleOpenProjectTitleEditForm() {
@@ -63,7 +63,7 @@ export default function ProjectPage({
 
     async function handlerCreateTask(newTask: Task) {
         const taskController = new TaskController();
-        await taskController.createTask(project.id, newTask).then(updateStorageContext)
+        await taskController.createTask(project.id, newTask).then(storageContext.updateStorage)
     }
 
     useEffect(() => {

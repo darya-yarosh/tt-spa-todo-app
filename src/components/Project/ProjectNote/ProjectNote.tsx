@@ -9,7 +9,7 @@ import removeIcon from "images/buttons/remove.svg";
 
 import styles from "components/Project/ProjectNote/ProjectNote.module.scss"
 
-import { OpenProjectContext } from 'App';
+import { PageControllerContext } from 'App';
 
 interface ProjectNoteProps {
     project: Project;
@@ -20,7 +20,7 @@ export default function ProjectNote({
     project,
     removeProject
 }: ProjectNoteProps) {
-    const openProjectFunc = useContext(OpenProjectContext)
+    const pageControllerContext = useContext(PageControllerContext)
 
     function handlerRemoveProject() {
         const isConfirm = window.confirm(`You want to delete project "${project.title}". Are you sure?`)
@@ -32,7 +32,7 @@ export default function ProjectNote({
 
     return <div className={styles.wrapper}>
         <span className={styles.span}>
-            <ButtonIcon iconSVG={editIcon} caption={BUTTON.edit} onClick={() => openProjectFunc(project)} />
+            <ButtonIcon iconSVG={editIcon} caption={BUTTON.edit} onClick={() => pageControllerContext.openProjectPage(project)} />
             <p className={styles.title}>{project.title}</p>
         </span>
         <span>

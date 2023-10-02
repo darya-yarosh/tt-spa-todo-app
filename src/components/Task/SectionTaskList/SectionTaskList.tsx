@@ -9,7 +9,7 @@ import TaskController from 'logic/storage/TaskController';
 
 import styles from "components/Task/SectionTaskList/SectionTaskList.module.scss"
 
-import { UpdateStorageContext } from "App";
+import { StorageContext } from "App";
 
 interface SectionTaskListProps {
     title: string,
@@ -22,19 +22,19 @@ export default function SectionTaskList({
     taskList,
     projectId,
 }: SectionTaskListProps) {
-    const updateStorageContext = useContext(UpdateStorageContext);
+    const storageContext = useContext(StorageContext);
     const ref = createRef<HTMLDivElement>();
 
     const sectionCoordinatesList = useContext(SectionInfoListContext);
 
     async function updateTask(updatedTask: Task) {
         const taskController = new TaskController();
-        await taskController.setTask(updatedTask.id, projectId, updatedTask).then(updateStorageContext);
+        await taskController.setTask(updatedTask.id, projectId, updatedTask).then(storageContext.updateStorage);
     }
 
     async function removeTask(taskId: string) {
         const taskController = new TaskController();
-        await taskController.removeTask(projectId, taskId).then(updateStorageContext);
+        await taskController.removeTask(projectId, taskId).then(storageContext.updateStorage);
     }
 
     useEffect(() => {

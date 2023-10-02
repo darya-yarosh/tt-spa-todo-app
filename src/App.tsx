@@ -15,17 +15,29 @@ import useToggle from 'logic/utils/use-toggle';
 
 import 'App.scss';
 
-export const UpdateStorageContext = createContext(() => { });
-export const OpenProjectContext = createContext((selectedProject: Project) => { });
-export const ModalContext = createContext<ModalContextProps>({
-	toggle: () => { },
-	setContent: (element: JSX.Element) => { },
+interface StorageContextProps {
+	updateStorage: () => void;
+}
+export const StorageContext = createContext<StorageContextProps>({
+	updateStorage: () => { },
+});
+
+interface PageControllerContextProps {
+	openProjectPage: (selectedProject: Project)=>void;
+}
+export const PageControllerContext = createContext<PageControllerContextProps>({
+	openProjectPage: (selectedProject: Project)=>{ },
 });
 
 interface ModalContextProps {
 	toggle: () => void,
 	setContent: (element: JSX.Element) => void
 }
+export const ModalContext = createContext<ModalContextProps>({
+	toggle: () => { },
+	setContent: (element: JSX.Element) => { },
+});
+
 
 export default function App() {
 	const [modalContent, setModalContent] = useState(<></>);
@@ -76,12 +88,12 @@ export default function App() {
 			<div className="app-wrapper">
 				<Header />
 				<ModalContext.Provider value={modalContextValue}>
-					<UpdateStorageContext.Provider value={loadStorageData}>
-						<OpenProjectContext.Provider value={openProjectPage}>
+					<StorageContext.Provider value={{updateStorage: loadStorageData}}>
+						<PageControllerContext.Provider value={{openProjectPage: openProjectPage}}>
 							{currentPage === PageList.projects && <ProjectListPage projectList={storage.projects} />}
-						</OpenProjectContext.Provider>
+						</PageControllerContext.Provider>
 						{currentPage === PageList.tasks && <ProjectPage project={currentProject} returnToPrevPage={closeProjectPage} />}
-					</UpdateStorageContext.Provider>
+					</StorageContext.Provider>
 				</ModalContext.Provider>
 				<Footer />
 				{isModalOpen && <Modal handleDismiss={toggleIsModalOpen as () => void}>{modalContent}</Modal>}
