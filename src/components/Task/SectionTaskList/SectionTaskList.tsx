@@ -47,7 +47,7 @@ export default function SectionTaskList({
             sectionCoordinatesList[sectionIndex].coordinates.x = currentSectionCoordinates.x
             sectionCoordinatesList[sectionIndex].coordinates.y = currentSectionCoordinates.y
         }
-    }, [])
+    }, [taskList])
 
     return <div ref={ref} className={styles.wrapper}>
         <p className={styles.title}>{title}</p>
