@@ -1,12 +1,9 @@
-@import "App.scss";
+@import "App";
 
 .wrapper {
   position: fixed;
-  left: 10%;
-  right: 10%;
-  /* top: 16.04%; */
-  bottom: 60%;
-  background: #d9d9d9;
+  top: 16.04%;
+  background: $color-third;
   border-radius: 10px;
   padding: 12px;
 }
@@ -19,11 +16,9 @@
 }
 
 .title {
-  font-family: "PT Sans Caption";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  line-height: 41px;
 
   color: $color-first;
   margin: 0;
@@ -33,38 +28,40 @@
   display: flex;
   height: 0px;
 
-  border: 1px solid #000000;
+  border: 1px solid $color-first;
   margin: 4px 0px;
 }
 
-
 .content {
-    padding: 8px 0px;
-    .span {
-        display: flex;
-        gap: 8px;
-        .label {
-          font-family: "PT Sans Caption";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 20px;
-          line-height: 41px;
-        
-          color: $color-first;
-          margin: 0;
-        }
+  padding: 8px 0px;
+
+  span {
+    display: flex;
+    gap: 8px;
+
+    label {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      align-self: center;
+
+      color: $color-first;
+      margin: 0;
+    }
   }
 }
 
 .input_string {
-  width: 460px;
-  height: 32px;
-  left: 273px;
-  top: 188px;
-
-  background: #ffffff;
+  border: 1px solid $color-first;
+  border-radius: 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 4px;
+  background: $color-second;
+  width: 100%;
 }
+
 .navigation {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
