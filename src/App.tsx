@@ -40,7 +40,7 @@ export const ModalContext = createContext<ModalContextProps>({
 
 
 export default function App() {
-	const [modalContent, setModalContent] = useState(<></>);
+	const [modalContent, setModalContent] = useState<JSX.Element>(<></>);
 	const [isModalOpen, toggleIsModalOpen] = useToggle(false);
 	const [isLoadedData, setIsLoadedData] = useState<boolean>(false);
 	const [storage, setStorage] = useState<Storage>({ projects: [] });
