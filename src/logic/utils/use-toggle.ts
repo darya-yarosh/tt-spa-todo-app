@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function useToggle(initialValue = false) {
+type useToggleReturnType = [boolean, () => void];
+
+export default function useToggle(initialValue = false): useToggleReturnType {
 	if (typeof initialValue !== 'boolean') {
 		console.warn('Invalid type for useToggle');
 	}

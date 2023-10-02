@@ -37,8 +37,8 @@ export default function TaskNote({
             task={task}
             operationTitle={FormOperation.create}
             sendForm={updateTask}
-            closeForm={modal.toggle as () => void} />)
-        modal.toggle();
+            closeForm={modal.closeModal} />)
+        modal.openModal();
     }
 
     function handlerRemoveTask() {

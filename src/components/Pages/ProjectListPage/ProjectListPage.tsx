@@ -28,8 +28,8 @@ export default function ProjectListPage({
     function handlerOpenProjectForm() {
         modal.setContent(<ProjectForm operationTitle={FormOperation.create}
             sendForm={handlerSendFormProject}
-            closeForm={modal.toggle} />)
-        modal.toggle();
+            closeForm={modal.closeModal} />)
+        modal.openModal();
     }
 
     async function handlerSendFormProject(newProject: Project) {

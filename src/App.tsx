@@ -30,11 +30,13 @@ export const PageControllerContext = createContext<PageControllerContextProps>({
 });
 
 interface ModalContextProps {
-	toggle: () => void,
+	openModal: () => void,
+	closeModal: () => void,
 	setContent: (element: JSX.Element) => void
 }
 export const ModalContext = createContext<ModalContextProps>({
-	toggle: () => { },
+	openModal: () => { },
+	closeModal: () => { },
 	setContent: (element: JSX.Element) => { },
 });
 
@@ -81,8 +83,16 @@ export default function App() {
 		});
 	}
 
+	function openModal() {
+		if (!isModalOpen) toggleIsModalOpen();
+	}
+	function closeModal() {
+		if (isModalOpen) toggleIsModalOpen();
+	}
+
 	const modalContextValue: ModalContextProps = {
-		toggle: toggleIsModalOpen as () => void,
+		openModal: openModal,
+		closeModal: closeModal,
 		setContent: setModalContent
 	}
 
@@ -106,7 +116,7 @@ export default function App() {
 					</StorageContext.Provider>
 				</ModalContext.Provider>
 				<Footer />
-				{isModalOpen && <Modal handleDismiss={toggleIsModalOpen as () => void}>{modalContent}</Modal>}
+				{isModalOpen && <Modal handleDismiss={closeModal}>{modalContent}</Modal>}
 			</div>
 		</div>
 	);

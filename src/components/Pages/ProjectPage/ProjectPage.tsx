@@ -46,15 +46,15 @@ export default function ProjectPage({
             project={project}
             operationTitle={FormOperation.create}
             sendForm={handlerSendFormProject}
-            closeForm={modal.toggle} />)
-        modal.toggle();
+            closeForm={modal.closeModal} />)
+        modal.openModal();
     }
 
     function handlerOpenTaskForm() {
         modal.setContent(<TaskForm operationTitle={FormOperation.create}
             sendForm={handlerCreateTask}
-            closeForm={modal.toggle} />)
-        modal.toggle();
+            closeForm={modal.closeModal} />)
+        modal.openModal();
     }
 
     async function handlerCreateTask(newTask: Task) {
