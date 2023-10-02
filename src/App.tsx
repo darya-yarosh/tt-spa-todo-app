@@ -11,7 +11,6 @@ import ProjectListPage from 'components/Pages/ProjectListPage/ProjectListPage';
 import ProjectPage from 'components/Pages/ProjectPage/ProjectPage';
 
 import StorageController from 'logic/storage/StorageController';
-import useToggle from 'logic/utils/use-toggle';
 
 import 'App.scss';
 
@@ -43,7 +42,7 @@ export const ModalContext = createContext<ModalContextProps>({
 
 export default function App() {
 	const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
-	const [isModalOpen, toggleIsModalOpen] = useToggle(false);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [isLoadedData, setIsLoadedData] = useState<boolean>(false);
 	const [storage, setStorage] = useState<Storage>({ projects: [] });
 	const [currentPage, setCurrentPage] = useState<PageList>(PageList.projects);
@@ -84,10 +83,10 @@ export default function App() {
 	}
 
 	function openModal() {
-		if (!isModalOpen) toggleIsModalOpen();
+		setIsModalOpen(true);
 	}
 	function closeModal() {
-		if (isModalOpen) toggleIsModalOpen();
+		setIsModalOpen(false);
 	}
 
 	const modalContextValue: ModalContextProps = {
