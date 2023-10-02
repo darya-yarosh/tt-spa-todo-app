@@ -1,15 +1,22 @@
+@import "App";
+
 .header {
+  max-height: 5vh;
   display: flex;
   justify-content: center;
-  
+}
+
+.title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+
+  color: $color-first;
+  margin: 0;
+}
+
+@media (max-height: 600px) {
   .title {
-    font-family: "PT Sans Caption";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 26px;
-  
-    color: #000000;
-    margin: 0;
+    font-size: 16px;
   }
 }
