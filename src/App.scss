@@ -55,10 +55,9 @@ body {
 .app-wrapper {
   margin: auto;
   width: 95%;
-  gap: 4px;
-  display: flex;
-  flex-direction: column;
-  padding: 8px 0px 0px 0px;
+  display: grid;
+  grid-template-rows: 1fr 30fr 2fr;
+  height: 100%;
 }
 
 .is-dragging {
@@ -81,5 +80,6 @@ body {
 
 select,
 input {
+  border-color: gray;
   color: $color-first;
 }
