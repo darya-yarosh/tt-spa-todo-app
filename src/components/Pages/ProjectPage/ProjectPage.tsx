@@ -35,8 +35,7 @@ export default function ProjectPage({
     returnToPrevPage
 }: ProejctPageProps) {
     const [searchFilter, setSearchFilter] = useState<string>("");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const filteredTasks = useMemo(() => getFilteredTasks(project.tasks, searchFilter), [searchFilter]);
+    const filteredTasks = useMemo(() => getFilteredTasks(project.tasks, searchFilter), [searchFilter, project.tasks]);
 
     const modal = useContext(ModalContext);
     const storageContext = useContext(StorageContext)
