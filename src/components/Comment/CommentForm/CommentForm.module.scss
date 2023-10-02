@@ -1,3 +1,5 @@
+@import "App";
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -15,5 +17,19 @@
 
   button {
     border: 1px solid gray;
+  }
+
+  $input-border-color: gray;
+  $input-border-radius: 0px;
+
+  input {
+    border: 1px solid $input-border-color;
+    border-radius: $input-border-radius;
+    background: $color-second;
+
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 4px;
+    color: $color-first;
   }
 }
