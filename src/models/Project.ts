@@ -10,3 +10,12 @@ export function isValidProject(project: Project) {
     const isCorrectTitle = project.title.trim().length > 0;
     return isCorrectTitle;
 }
+
+export enum ProjectInterface {
+    project = "Project"
+}
+
+export enum ProjectParameters {
+    title = "Title",
+    tasks = "Task list"
+}

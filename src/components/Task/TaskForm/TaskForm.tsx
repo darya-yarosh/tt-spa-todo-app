@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Task, { Priority, ToggleTask, TaskStatus, isValidTask } from "models/Task";
+import Task, { Priority, ToggleTask, TaskStatus, isValidTask, TaskParameters, TaskInterface } from "models/Task";
 import { Comment } from "models/Comment";
 import { AttachedFile } from "models/AttachedFile";
 import { FormOperation, BUTTON } from "models/Interface";
@@ -68,31 +68,31 @@ export default function TaskForm({
     }}>
         <div className={styles.header}>
             <ButtonIcon iconSVG={returnIcon} caption={BUTTON.return} onClick={closeForm} />
-            <p>{operationTitle} task:</p>
+            <p>{operationTitle} {TaskInterface.task.toLowerCase()}:</p>
         </div>
         <span className={styles.line} />
         <div className={styles.content}>
             <span>
-                <label>Title:</label>
+                <label>{TaskParameters.title}:</label>
                 <input className={styles.input__string} type="text" placeholder="№1 Task name" minLength={1} maxLength={50}
                     value={title}
                     onChange={(event) => setTitle(event.target.value)} />
             </span>
             <span>
-                <label>Description:</label>
+                <label>{TaskParameters.description}:</label>
                 <textarea className={styles.input__string} placeholder="This is task description." maxLength={255}
                     value={description}
                     onChange={(event) => setDescription(event.target.value)} />
             </span>
             <span>
-                <label>Working hours:</label>
+                <label>{TaskParameters.workingHours}:</label>
                 <input className={styles.input__number} type="number" placeholder="40" min={1}
                     value={workingHours}
                     onChange={(event) => setWorkingHours(Number(event.target.value))} />
             </span>
             <span>
                 <span>
-                    <label>Priority:</label>
+                    <label>{TaskParameters.priority}:</label>
                     <select value={priority} onChange={(event) => setPriority(event.target.value as Priority)}>
                         {priorityList.map((priorityVariant: Priority) =>
                             <option key={priorityVariant} value={priorityVariant}>{priorityVariant}</option>
@@ -100,7 +100,7 @@ export default function TaskForm({
                     </select>
                 </span>
                 <span>
-                    <label>Status:</label>
+                    <label>{TaskParameters.status}:</label>
                     <select value={status} onChange={(event) => setStatus(event.target.value as TaskStatus)}>
                         {statusList.map((statusVariant: TaskStatus) =>
                             <option key={statusVariant} value={statusVariant}>{statusVariant}</option>
@@ -109,15 +109,15 @@ export default function TaskForm({
                 </span>
             </span>
             <span>
-                <label>Attached files:</label>
+                <label>{TaskParameters.attachedFiles}:</label>
                 <AttachedFileListForm noteAttachedFiles={attachedFiles} sendForm={setAttachedFiles} />
             </span>
             <span>
-                <label>Subtasks:</label>
+                <label>{TaskParameters.subtasks}:</label>
                 <ToggleTaskListForm taskList={subtasks} sendForm={setSubtasks} />
             </span>
             <span>
-                <label>Comments:</label>
+                <label>{TaskParameters.comments}:</label>
                 <CommentListForm comments={comments} sendForm={(comments: Comment[]) => setComments(comments)} />
             </span>
         </div>

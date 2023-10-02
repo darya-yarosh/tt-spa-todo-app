@@ -1,4 +1,4 @@
-import { AttachedFile } from "models/AttachedFile";
+import { AttachedFile, AttachedFileParameters } from "models/AttachedFile";
 
 import styles from "components/AttachedFiles/AttachedFileList/AttachedFileList.module.scss";
 
@@ -14,10 +14,10 @@ export default function AttachedFileList({
             <table>
                 <tbody>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Size</th>
-                        <th>Added</th>
+                        <th>{AttachedFileParameters.name}</th>
+                        <th>{AttachedFileParameters.type}</th>
+                        <th>{AttachedFileParameters.size}</th>
+                        <th>{AttachedFileParameters.dateAdded}</th>
                     </tr>
 
                     {noteAttachedFiles.map(attachedFile =>

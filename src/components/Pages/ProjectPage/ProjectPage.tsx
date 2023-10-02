@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useState } from "react";
 
 import Task from "models/Task";
-import Project from "models/Project";
+import Project, { ProjectInterface } from "models/Project";
 import { SectionInfo, SectionList } from "models/Section";
 import { FormOperation, PageList } from "models/Interface";
 
@@ -71,7 +71,7 @@ export default function ProjectPage({
                 <ButtonIcon iconSVG={returnIcon}
                     caption={"Button for return to project list."}
                     onClick={returnToPrevPage} />
-                <p className={styles.title}><span>Project&nbsp;</span><span>"{project.title}"</span></p>
+                <p className={styles.title}><span>{ProjectInterface.project}&nbsp;</span><span>"{project.title}"</span></p>
                 <ButtonIcon iconSVG={editIcon}
                     caption={"Button for open edit form for project title."}
                     onClick={handleOpenProjectTitleEditForm} />

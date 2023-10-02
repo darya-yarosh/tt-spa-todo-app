@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Project, { isValidProject } from "models/Project";
+import Project, { ProjectInterface, ProjectParameters, isValidProject } from "models/Project";
 import { BUTTON, FormOperation } from "models/Interface";
 
 import ButtonIcon from "components/General/ButtonIcon/ButtonIcon";
@@ -46,12 +46,12 @@ export default function ProjectForm({
         }}>
         <div className={styles.header}>
             <ButtonIcon iconSVG={returnIcon} caption={BUTTON.return} onClick={closeForm} />
-            <p className={styles.title}>{operationTitle} project:</p>
+            <p className={styles.title}>{operationTitle} {ProjectInterface.project.toLowerCase()}:</p>
         </div>
         <span className={styles.line} />
         <div className={styles.content}>
             <span>
-                <label>Title:</label>
+                <label>{ProjectParameters.title}:</label>
                 <input className={styles.input_string} type="text"
                     placeholder="№1 Project name"
                     value={projectTitle}

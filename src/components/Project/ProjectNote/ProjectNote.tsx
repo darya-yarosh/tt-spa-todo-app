@@ -36,7 +36,7 @@ export default function ProjectNote({
             <p className={styles.title}>{project.title}</p>
         </span>
         <span>
-            <ButtonIcon iconSVG={removeIcon} caption={BUTTON.delete} onClick={handlerRemoveProject} />
+            <ButtonIcon iconSVG={removeIcon} caption={BUTTON.remove} onClick={handlerRemoveProject} />
         </span>
     </div>
 }

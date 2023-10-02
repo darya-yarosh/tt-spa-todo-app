@@ -40,3 +40,21 @@ export function isValidTask(task: Task) {
     const isCorrectWorkingHours = task.workingHours > 0 ? true : window.alert("The task working hours must be greater than zero.");
     return isCorrectTitle && isCorrectWorkingHours;
 }
+
+export enum TaskInterface {
+    task = "Task"
+}
+
+export enum TaskParameters {
+    number = "Number",
+    title = "Title",
+    description = "Description",
+    dateCreated = "Date created",
+    workingHours = "Working hours",
+    dateEnded = "Date ended",
+    priority = "Priority",
+    status = "Status",
+    subtasks = "Subtasks",
+    attachedFiles = "Attached files",
+    comments = "Comments",
+}

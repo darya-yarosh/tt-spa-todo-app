@@ -74,7 +74,7 @@ export default function CommentExistingForm({
             {isOpenEditForm && <textarea className={styles.comment__content} value={commentValue} onChange={(event) => setCommentValue(event.target.value)} />}
             {!isOpenEditForm && <div className={styles.comment__content}>{comment.value}</div>}
             <div className={styles.comment__nav}>
-                <button type="button" disabled={isOpenEditForm || isRemovingComment} onClick={toggleCommentRemoveNav}>Remove</button>
+                <button type="button" disabled={isOpenEditForm || isRemovingComment} onClick={toggleCommentRemoveNav}>{BUTTON.remove}</button>
                 <button type="button" onClick={toggleCommentReplyFormStatus}>{replyText}</button>
                 <button type="button" onClick={toggleCommentEditFormStatus}>{editText}</button>
                 {isRemovingComment && <p className={styles.alert__text}>

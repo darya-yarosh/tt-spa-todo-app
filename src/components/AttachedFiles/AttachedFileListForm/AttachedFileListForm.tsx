@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { AttachedFile } from "models/AttachedFile";
+import { AttachedFile, AttachedFileParameters } from "models/AttachedFile";
 
 import ButtonIcon from "components/General/ButtonIcon/ButtonIcon";
 import removeIcon from "images/buttons/remove.svg";
@@ -20,7 +20,7 @@ export default function AttachedFileListForm({
 
     function addAttachedFile(newFile: FileList | null) {
         if (newFile === null) return;
-        
+
         const keys = Object.keys(newFile)
         const updatedAttachedFiles = [...attachedFileList];
         keys.forEach(key => {
@@ -62,11 +62,11 @@ export default function AttachedFileListForm({
             <table>
                 <tbody>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Size</th>
-                        <th>Added</th>
-                        <th>Nav</th>
+                        <th>{AttachedFileParameters.name}</th>
+                        <th>{AttachedFileParameters.type}</th>
+                        <th>{AttachedFileParameters.size}</th>
+                        <th>{AttachedFileParameters.dateAdded}</th>
+                        <th>{AttachedFileParameters.navigation}</th>
                     </tr>
 
                     {attachedFileList.map(attachedFile =>

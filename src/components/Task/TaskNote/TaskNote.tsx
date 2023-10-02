@@ -1,6 +1,6 @@
 import { createRef, useContext, useEffect } from "react";
 
-import Task, { TaskStatus } from "models/Task"
+import Task, { TaskParameters, TaskStatus } from "models/Task"
 import { BUTTON, FormOperation } from "models/Interface";
 
 import TaskForm from "components/Task/TaskForm/TaskForm";
@@ -109,30 +109,30 @@ export default function TaskNote({
                 <p>{task.number} | {task.title}</p>
             </span>
             <span>
-                <ButtonIcon iconSVG={removeIcon} caption={BUTTON.delete} onClick={handlerRemoveTask} />
+                <ButtonIcon iconSVG={removeIcon} caption={BUTTON.remove} onClick={handlerRemoveTask} />
             </span>
         </div>
         <span className={styles.line} />
         <div className={styles.content}>
             <span className={styles.property}>
-                <p className={styles.label}>Description: {task.description}</p>
+                <p className={styles.label}>{TaskParameters.description}: {task.description}</p>
             </span>
             <span className={styles.property}>
-                <p className={styles.label}>Working hours: {task.workingHours}</p>
+                <p className={styles.label}>{TaskParameters.workingHours}: {task.workingHours}</p>
             </span>
             <span className={styles.property}>
-                <p className={styles.label}>Priority: {task.priority}</p>
+                <p className={styles.label}>{TaskParameters.priority}: {task.priority}</p>
             </span>
             <span className={styles.property}>
-                <p className={styles.label}>Attached files: {task.attachedFiles.length}</p>
+                <p className={styles.label}>{TaskParameters.attachedFiles}: {task.attachedFiles.length}</p>
                 {task.attachedFiles.length > 0 && <AttachedFileList noteAttachedFiles={task.attachedFiles} />}
             </span>
             <span className={styles.property}>
-                <label className={styles.label}>Subtasks:</label>
+                <label className={styles.label}>{TaskParameters.subtasks}:</label>
                 <ToggleTaskList taskList={task.subtasks} />
             </span>
             <span className={styles.property}>
-                <label className={styles.label}>Comments:</label>
+                <label className={styles.label}>{TaskParameters.comments}:</label>
                 <CommentList comments={task.comments} />
             </span>
         </div>

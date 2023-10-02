@@ -4,7 +4,7 @@ export const enum BUTTON {
     open = "Open",
     save = "Save",
     edit = "Edit",
-    delete = "Delete",
+    remove = "Remove",
     return = "Return",
     add = "Add",
     cancel = "Cancel",
