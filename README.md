@@ -1,4 +1,4 @@
-# Training task - Sinle Page Application "TODO APP"
+# Training task - Single Page Application "TODO APP"
 
 ## Netlify DEMO
 https://yds-tt-spa-todo-app.netlify.app
