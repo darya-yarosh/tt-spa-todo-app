@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 import Task from "models/Task";
 import Project from "models/Project";
@@ -34,15 +34,12 @@ export default function ProjectPage({
     project,
     returnToPrevPage
 }: ProejctPageProps) {
-    const modal = useContext(ModalContext);
-
     const [searchFilter, setSearchFilter] = useState<string>("");
-    const [taskList, setTaskList] = useState<Task[]>(project.tasks)
-    const storageContext = useContext(StorageContext)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const filteredTasks = useMemo(() => getFilteredTasks(project.tasks, searchFilter), [searchFilter]);
 
-    async function handlerSendFormProject(newProject: Project) {
-        await ProjectController.setProject(project.id, newProject).then(storageContext.updateStorage);
-    }
+    const modal = useContext(ModalContext);
+    const storageContext = useContext(StorageContext)
 
     function handleOpenProjectTitleEditForm() {
         modal.setContent(<ProjectForm
@@ -64,14 +61,9 @@ export default function ProjectPage({
         await TaskController.createTask(project.id, newTask).then(storageContext.updateStorage)
     }
 
-    useEffect(() => {
-        if (searchFilter === "") {
-            setTaskList(project.tasks);
-        } else {
-            setTaskList(getFilteredTasks(project.tasks, searchFilter))
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchFilter, project])
+    async function handlerSendFormProject(newProject: Project) {
+        await ProjectController.setProject(project.id, newProject).then(storageContext.updateStorage);
+    }
 
     return <div className={styles.wrapper}>
         <div className={styles.header}>
@@ -100,7 +92,7 @@ export default function ProjectPage({
             <div className={styles.grid}>
                 <SectionInfoListContext.Provider value={SectionList}>
                     {SectionList.map(section =>
-                        <SectionTaskList key={section.title} title={section.title} taskList={taskList.filter(task => task.status === section.title)} projectId={project.id} />
+                        <SectionTaskList key={section.title} title={section.title} taskList={filteredTasks.filter(task => task.status === section.title)} projectId={project.id} />
                     )}
                 </SectionInfoListContext.Provider>
             </div>
