@@ -28,13 +28,11 @@ export default function SectionTaskList({
     const sectionCoordinatesList = useContext(SectionInfoListContext);
 
     async function updateTask(updatedTask: Task) {
-        const taskController = new TaskController();
-        await taskController.setTask(updatedTask.id, projectId, updatedTask).then(storageContext.updateStorage);
+        await TaskController.setTask(updatedTask.id, projectId, updatedTask).then(storageContext.updateStorage);
     }
 
     async function removeTask(taskId: string) {
-        const taskController = new TaskController();
-        await taskController.removeTask(projectId, taskId).then(storageContext.updateStorage);
+        await TaskController.removeTask(projectId, taskId).then(storageContext.updateStorage);
     }
 
     useEffect(() => {

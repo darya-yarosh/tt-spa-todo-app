@@ -1,7 +1,7 @@
 import Storage from "models/Storage";
 //import { MOCK_STORAGE } from "models/mockStorage";
 
-export default class StorageController {
+export class StorageControllerClass {
     async getStorageData() {
         const stringData = localStorage.getItem('data');
 
@@ -23,3 +23,7 @@ export default class StorageController {
         localStorage.setItem('data', stringUpdatedData);
     }
 }
+
+const StorageController = new StorageControllerClass();
+
+export default StorageController;

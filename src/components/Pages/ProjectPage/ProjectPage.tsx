@@ -41,8 +41,7 @@ export default function ProjectPage({
     const storageContext = useContext(StorageContext)
 
     async function handlerSendFormProject(newProject: Project) {
-        const projectController = new ProjectController();
-        await projectController.setProject(project.id, newProject).then(storageContext.updateStorage);
+        await ProjectController.setProject(project.id, newProject).then(storageContext.updateStorage);
     }
 
     function handleOpenProjectTitleEditForm() {
@@ -62,8 +61,7 @@ export default function ProjectPage({
     }
 
     async function handlerCreateTask(newTask: Task) {
-        const taskController = new TaskController();
-        await taskController.createTask(project.id, newTask).then(storageContext.updateStorage)
+        await TaskController.createTask(project.id, newTask).then(storageContext.updateStorage)
     }
 
     useEffect(() => {

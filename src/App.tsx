@@ -58,8 +58,7 @@ export default function App() {
 	}
 
 	async function loadStorageData() {
-		const storageController = new StorageController();
-		await storageController.getStorageData().then(async data => {
+		await StorageController.getStorageData().then(async data => {
 			setCurrentProject(storage.projects[-1]);
 			if (data !== undefined) {
 				const currentProjectIndex = data.projects.findIndex(project => project.id === (currentProject?.id || ""))

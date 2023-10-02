@@ -33,14 +33,11 @@ export default function ProjectListPage({
     }
 
     async function handlerSendFormProject(newProject: Project) {
-        const projectController = new ProjectController();
-        await projectController.createProject(newProject).then(storageContext.updateStorage);
+        await ProjectController.createProject(newProject).then(storageContext.updateStorage);
     }
 
-    function handlerRemoveProject(removeId: string) {
-        const projectController = new ProjectController();
-        projectController.removeProject(removeId).then(storageContext.updateStorage);
-
+    async function handlerRemoveProject(removeId: string) {
+        await ProjectController.removeProject(removeId).then(storageContext.updateStorage);
     }
 
     return <div className={styles.wrapper}>

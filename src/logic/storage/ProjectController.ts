@@ -3,7 +3,7 @@ import Storage from "models/Storage";
 
 import StorageController from "logic/storage/StorageController";
 
-export default class ProjectController {
+export class ProjectControllerClass {
     async createProject(newProject: Project) {
         const updatedProjectList = await this.getProjectList();
         if (newProject.id === "") newProject.id = crypto.randomUUID();
@@ -32,8 +32,7 @@ export default class ProjectController {
     }
 
     async getProjectList() {
-        const storageController = new StorageController();
-        const storageData = await storageController.getStorageData();
+        const storageData = await StorageController.getStorageData();
         if (storageData === undefined) {
             const emptyProjectList: Project[] = []
             return emptyProjectList;
@@ -46,7 +45,10 @@ export default class ProjectController {
             projects: updatedProjectList
         }
 
-        const storageController = new StorageController();
-        await storageController.setStorageData(updatedStorageData);
+        await StorageController.setStorageData(updatedStorageData);
     }
 }
+
+const ProjectController = new ProjectControllerClass();
+
+export default ProjectController;
