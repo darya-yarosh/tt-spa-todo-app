@@ -115,7 +115,7 @@ export default function TaskNote({
         <span className={styles.line} />
         <div className={styles.content}>
             <span className={styles.property}>
-                <p className={styles.label}>Description: {task.desc}</p>
+                <p className={styles.label}>Description: {task.description}</p>
             </span>
             <span className={styles.property}>
                 <p className={styles.label}>Working hours: {task.workingHours}</p>
@@ -138,7 +138,7 @@ export default function TaskNote({
         </div>
         <span className={styles.line} />
         <div className={styles.dateInfo}>
-            <span>{task.dataCreated}</span>
+            <span>{task.dateCreated}</span>
             <span>{task.dateEnded}</span>
         </div>
     </div>

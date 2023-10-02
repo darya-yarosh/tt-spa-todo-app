@@ -30,7 +30,7 @@ export default function TaskForm({
 }: TaskFormProps) {
     const [number, setNumber] = useState<number>(task?.number || 1);
     const [title, setTitle] = useState<string>(task?.title || "");
-    const [desc, setDesc] = useState<string>(task?.desc || "");
+    const [description, setDescription] = useState<string>(task?.description || "");
     const [workingHours, setWorkingHours] = useState<number>(task?.workingHours || 1);
     const [priority, setPriority] = useState<Priority>(task?.priority || Priority.low);
     const [status, setStatus] = useState<TaskStatus>(task?.status || TaskStatus.queue)
@@ -57,8 +57,8 @@ export default function TaskForm({
             id: task?.id || crypto.randomUUID(),
             number: number,
             title: title,
-            desc: desc,
-            dataCreated: task?.dataCreated || new Date().toLocaleDateString('ru-RU'),
+            description: description,
+            dateCreated: task?.dateCreated || new Date().toLocaleDateString('ru-RU'),
             workingHours: workingHours,
             dateEnded: (status !== TaskStatus.done) ? "" : new Date().toLocaleDateString('ru-RU'),
             priority: priority,
@@ -95,8 +95,8 @@ export default function TaskForm({
             <span>
                 <label>Description:</label>
                 <textarea className={styles.input__string} placeholder="This is task description." maxLength={255}
-                    value={desc}
-                    onChange={(event) => setDesc(event.target.value)} />
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)} />
             </span>
             <span>
                 <label>Working hours:</label>
